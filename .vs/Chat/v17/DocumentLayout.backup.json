@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\learn\\C#\\Chat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{644590EB-78C0-4A19-A627-725FAC1C575C}|Chat\\Chat.Client.csproj|d:\\learn\\c#\\chat\\chat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{644590EB-78C0-4A19-A627-725FAC1C575C}|Chat\\Chat.Client.csproj|solutionrelative:chat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FC1846F-EA04-4236-B26F-B75273332F51}|Chat.Server\\Chat.Server.csproj|d:\\learn\\c#\\chat\\chat.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FC1846F-EA04-4236-B26F-B75273332F51}|Chat.Server\\Chat.Server.csproj|solutionrelative:chat.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\learn\\C#\\Chat\\Chat.Server\\Program.cs",
+              "RelativeDocumentMoniker": "Chat.Server\\Program.cs",
+              "ToolTip": "D:\\learn\\C#\\Chat\\Chat.Server\\Program.cs",
+              "RelativeToolTip": "Chat.Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T17:19:14.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\learn\\C#\\Chat\\Chat\\Program.cs",
+              "RelativeDocumentMoniker": "Chat\\Program.cs",
+              "ToolTip": "D:\\learn\\C#\\Chat\\Chat\\Program.cs",
+              "RelativeToolTip": "Chat\\Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwCsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T17:08:55.782Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

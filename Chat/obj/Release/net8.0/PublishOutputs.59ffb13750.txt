@@ -1,0 +1,5 @@
+D:\learn\C#\Chat\Chat\bin\Release\net8.0\app.publish\Chat.Client.exe
+D:\learn\C#\Chat\Chat\bin\Release\net8.0\app.publish\Chat.Client.dll
+D:\learn\C#\Chat\Chat\bin\Release\net8.0\app.publish\Chat.Client.deps.json
+D:\learn\C#\Chat\Chat\bin\Release\net8.0\app.publish\Chat.Client.runtimeconfig.json
+D:\learn\C#\Chat\Chat\bin\Release\net8.0\app.publish\Chat.Client.pdb
