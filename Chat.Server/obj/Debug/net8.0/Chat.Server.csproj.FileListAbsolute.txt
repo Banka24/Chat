@@ -12,3 +12,4 @@ D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\refint\Chat.Server.dll
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.pdb
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.genruntimeconfig.cache
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\ref\Chat.Server.dll
+D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.sourcelink.json

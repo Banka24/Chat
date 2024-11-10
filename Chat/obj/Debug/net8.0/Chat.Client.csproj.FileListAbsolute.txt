@@ -14,3 +14,4 @@ D:\learn\C#\Chat\Chat\obj\Debug\net8.0\refint\Chat.Client.dll
 D:\learn\C#\Chat\Chat\obj\Debug\net8.0\Chat.Client.pdb
 D:\learn\C#\Chat\Chat\obj\Debug\net8.0\Chat.Client.genruntimeconfig.cache
 D:\learn\C#\Chat\Chat\obj\Debug\net8.0\ref\Chat.Client.dll
+D:\learn\C#\Chat\Chat\obj\Debug\net8.0\Chat.Client.sourcelink.json

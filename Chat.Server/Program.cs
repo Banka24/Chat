@@ -5,9 +5,8 @@
         public static async Task Main(string[] args)
         {
             var cts = new CancellationTokenSource();
-            var server = new ChatServer();
 
-            var serverTask = server.StartServerAsync("26.202.40.211", 8888, cts.Token);
+            var serverTask = ChatServer.StartServerAsync("127.0.0.1", 8888, cts.Token);
             Console.WriteLine("Нажмите Enter для остановки сервера...");
             Console.ReadLine();
 

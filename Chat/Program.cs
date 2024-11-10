@@ -19,7 +19,7 @@ namespace Chat.Client
             using var client = new TcpClient();
             try
             {
-                await client.ConnectAsync("26.202.40.211", 8888);
+                await client.ConnectAsync("127.0.0.1", 8888);
 
                 var stream = client.GetStream();
                 var nameBytes = Encoding.UTF8.GetBytes(_userName);
@@ -28,6 +28,7 @@ namespace Chat.Client
                 _ = Task.Run(async () => await ReadMessagesAsync(stream));
                 while (true)
                 {
+                    Console.Write("Я: ");
                     var message = Console.ReadLine() ?? throw new ArgumentNullException();
                     var bytes = Encoding.UTF8.GetBytes(message);
                     await stream.WriteAsync(bytes);

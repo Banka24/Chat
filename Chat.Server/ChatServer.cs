@@ -3,10 +3,10 @@ using System.Net;
 
 namespace Chat.Server
 {
-    public class ChatServer
+    public static class ChatServer
     {
         private static readonly List<ClientHandler> _clients = [];
-        public async Task StartServerAsync(string address, int port, CancellationToken token)
+        public static async Task StartServerAsync(string address, int port, CancellationToken token)
         {
             var ip = IPAddress.Parse(address);
             var listener = new TcpListener(ip, port);
