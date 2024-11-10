@@ -1,69 +1,44 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
-namespace Chat.Client
+class ChatClient
 {
-    public class Program
+    private static Socket _clientSocket;
+
+    static void Main(string[] args)
     {
-        private static string _userName = string.Empty;
+        _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        _clientSocket.Connect(new IPEndPoint(IPAddress.Parse("26.22.9.7"), 8888));
+        Console.WriteLine("Подключено к серверу");
 
-        public static void Main(string[] args)
+        Thread receiveThread = new Thread(ReceiveMessages);
+        receiveThread.Start();
+
+        while (true)
         {
-            Console.Write("Введите ваше имя: ");
-            _userName = Console.ReadLine() ?? "Неизвестный";
-            Work().Wait();
+            string message = Console.ReadLine();
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            _clientSocket.Send(data);
+        }
+    }
+
+    private static void ReceiveMessages()
+    {
+        byte[] buffer = new byte[1024];
+
+        while (true)
+        {
+            int received = _clientSocket.Receive(buffer);
+            if (received == 0) break;
+
+            string message = Encoding.UTF8.GetString(buffer, 0, received);
+            Console.WriteLine("Сообщение от сервера: " + message);
         }
 
-        private static async Task Work()
-        {
-            using var client = new TcpClient();
-            try
-            {
-                await client.ConnectAsync("127.0.0.1", 8888);
-
-                var stream = client.GetStream();
-                var nameBytes = Encoding.UTF8.GetBytes(_userName);
-                await stream.WriteAsync(nameBytes);
-
-                _ = Task.Run(async () => await ReadMessagesAsync(stream));
-                while (true)
-                {
-                    Console.Write("Я: ");
-                    var message = Console.ReadLine() ?? throw new ArgumentNullException();
-                    var bytes = Encoding.UTF8.GetBytes(message);
-                    await stream.WriteAsync(bytes);
-                }
-            }
-            catch (SocketException)
-            {
-                Console.WriteLine("Такого адреса нет");
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                Console.ReadLine();
-            }
-        }
-
-        private static async Task ReadMessagesAsync(NetworkStream stream)
-        {
-            var buffer = new byte[512];
-            while (true)
-            {
-                try
-                {
-                    var bytesRead = await stream.ReadAsync(buffer);
-                    if (bytesRead == 0) break;
-                    var message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine(message);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Ошибка при чтении сообщения: " + e.Message);
-                    break;
-                }
-            }
-        }
+        _clientSocket.Close();
+        Console.WriteLine("Соединение с сервером закрыто.");
     }
 }
