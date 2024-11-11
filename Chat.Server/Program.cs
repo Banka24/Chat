@@ -1,47 +1,71 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
-class ChatServer
+namespace Chat.Server
 {
-    private static Socket _serverSocket;
-    private static readonly byte[] _buffer = new byte[1024];
-
-    static void Main(string[] args)
+    public class ChatServer
     {
-        _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        _serverSocket.Bind(new IPEndPoint(IPAddress.Any, 8888));
-        _serverSocket.Listen(10);
-        Console.WriteLine("Сервер запущен. Ожидание подключений");
+        private static List<Socket> _connectedClients = [];
 
-        while (true)
+        static async Task Main(string[] args)
         {
-            Socket clientSocket = _serverSocket.Accept();
-            Console.WriteLine("Клиент подключен.");
-            Thread clientThread = new Thread(HandleClient);
-            clientThread.Start(clientSocket);
-        }
-    }
+            using var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            serverSocket.Bind(new IPEndPoint(IPAddress.Any, 8888));
+            serverSocket.Listen(10);
+            Console.WriteLine("Сервер запущен. Ожидание подключений");
 
-    private static void HandleClient(object obj)
-    {
-        Socket clientSocket = (Socket)obj;
-
-        while (true)
-        {
-            int received = clientSocket.Receive(_buffer);
-            if (received == 0) break;
-
-            string message = Encoding.UTF8.GetString(_buffer, 0, received);
-            Console.WriteLine("Сообщение от клиента: " + message);
-
-            // Ответ клиенту (эхо)
-            clientSocket.Send(_buffer, 0, received, SocketFlags.None);
+            while (true)
+            {
+                var clientSocket = await serverSocket.AcceptAsync();
+                Console.WriteLine("Клиент подключен.");
+                _ = HandleClientAsync(clientSocket);
+            }
         }
 
-        clientSocket.Close();
-        Console.WriteLine("Клиент отключен.");
+        private async static Task HandleClientAsync(Socket clientSocket)
+        {
+            _connectedClients.Add(clientSocket);
+
+            byte[] buffer = new byte[1024];
+            string userName = string.Empty;
+
+            try
+            {
+                while (true)
+                {
+                    int received = await clientSocket.ReceiveAsync(buffer, SocketFlags.None);
+                    if (received == 0) break;
+
+                    if (string.IsNullOrEmpty(userName))
+                    {
+                        userName = Encoding.UTF8.GetString(buffer, 0, received);
+                        Console.WriteLine($"Пользователь присоединился: {userName}");
+                        continue;
+                    }
+
+                    string message = Encoding.UTF8.GetString(buffer, 0, received);
+                    Console.WriteLine($"Сообщение от {userName}: " + message);
+
+                    foreach (var otherClient in _connectedClients)
+                    {
+                        if (otherClient != clientSocket)
+                        {
+                            await otherClient.SendAsync(buffer.AsMemory(0, received), SocketFlags.None);
+                        }
+                    }
+                }
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Ошибка при обработке клиента: {ex.Message}");
+            }
+            finally
+            {
+                clientSocket.Close();
+                _connectedClients.Remove(clientSocket);
+                Console.WriteLine("Клиент отключен.");
+            }
+        }
     }
 }

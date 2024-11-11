@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34031.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerChat", "S:\govno\ConsoleApp8\ConsoleApp8\ServerChat.csproj", "{A3699F81-74A0-4DBC-A8BF-B5022FF6D03B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerChat", ""D:\learn\C#\Chat\Chat.Server\Chat.Server.csproj"", "{A3699F81-74A0-4DBC-A8BF-B5022FF6D03B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientChat", "S:\govno\ConsoleApp9\ConsoleApp9\ClientChat.csproj", "{8B6DF790-902F-4F08-9118-3001E0EA7C2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientChat", ""D:\learn\C#\Chat\Chat\Chat.Client.csproj"", "{8B6DF790-902F-4F08-9118-3001E0EA7C2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
