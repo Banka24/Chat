@@ -11,20 +11,32 @@ namespace Chat.Client
 
         static async Task Main(string[] args)
         {
+            bool enter = true;
+            string ipAdress = string.Empty;
+            while (enter)
+            {
+                Console.WriteLine("Введите ip address");
+                ipAdress = Console.ReadLine()!;
+                if (!string.IsNullOrWhiteSpace(ipAdress))
+                {
+                    enter = false;
+                }
+            }
+
             Console.Write("Введите ваше имя: ");
             _userName = Console.ReadLine() ?? "Неизвестный";
 
-            await StartWorkAsync();
+            await StartWorkAsync(ipAdress);
         }
 
-        private async static Task StartWorkAsync()
+        private async static Task StartWorkAsync(string ipAdress)
         {
             using var cancellationTokenSource = new CancellationTokenSource();
             using (_clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 try
                 {
-                    await _clientSocket.ConnectAsync(new IPEndPoint(IPAddress.Parse("26.202.40.211"), 8888), cancellationTokenSource.Token);
+                    await _clientSocket.ConnectAsync(new IPEndPoint(IPAddress.Parse(ipAdress), 8888), cancellationTokenSource.Token);
                     Console.WriteLine("Подключено к серверу");
 
                     var nameBytes = Encoding.UTF8.GetBytes(_userName);
@@ -34,7 +46,6 @@ namespace Chat.Client
 
                     while (true)
                     {
-                        Console.Write("Я: ");
                         string message = Console.ReadLine()!;
                         if (string.IsNullOrWhiteSpace(message)) continue;
 
@@ -76,7 +87,9 @@ namespace Chat.Client
                     if (received == 0) break;
 
                     string message = Encoding.UTF8.GetString(buffer, 0, received);
-                    Console.WriteLine("Сообщение от сервера: " + message);
+                    if (message.StartsWith(_userName + ": ")) continue;
+
+                    Console.WriteLine(message);
                 }
                 catch (SocketException ex)
                 {

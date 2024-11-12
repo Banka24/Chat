@@ -6,7 +6,7 @@ namespace Chat.Server
 {
     public class ChatServer
     {
-        private static List<Socket> _connectedClients = [];
+        private readonly static List<Socket> _connectedClients = [];
 
         static async Task Main(string[] args)
         {
@@ -51,7 +51,9 @@ namespace Chat.Server
                     {
                         if (otherClient != clientSocket)
                         {
-                            await otherClient.SendAsync(buffer.AsMemory(0, received), SocketFlags.None);
+                            string formattedMessage = $"{userName}: {message}";
+                            byte[] messageBytes = Encoding.UTF8.GetBytes(formattedMessage);
+                            await otherClient.SendAsync(messageBytes, SocketFlags.None);
                         }
                     }
                 }
