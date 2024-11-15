@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:ClientApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+			 x:DataType="vm:RegistrationViewModel"
+             x:Class="ClientApp.Views.RegistrationView">
+
+	<Grid RowDefinitions="*, *">
+		<StackPanel HorizontalAlignment="Center" Margin="0, 150">
+			<TextBlock Text="{Binding Error, FallbackValue=''}" />
+			<TextBlock Text="Логин"/>
+			<TextBox Text="{Binding Login}" Width="200"/>
+			<TextBlock Text="Пароль"/>
+			<TextBox PasswordChar="*" Text="{Binding Password}" Width="200"/>
+		</StackPanel>
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+			<Button Width="170" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Зарегистрироваться" Command="{Binding }"/>
+
+			<Button Width="170" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Назад" Command="{Binding }"/>
+		</StackPanel>
+	</Grid>
+	
+</UserControl>

@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:ClientApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="vm:HomeViewModel"
+             x:Class="ClientApp.Views.HomeView">
+
+	<Grid RowDefinitions="*, *">
+		<Button HorizontalAlignment="Center" Width="170" VerticalAlignment="Center" 
+				Content="Прямое подключение" Command="{Binding OpenConnectionWindowCommand}"/>
+		<Button Grid.Row="1" HorizontalContentAlignment="Center" Width="170"
+				HorizontalAlignment="Center" VerticalAlignment="Center" Content="Сервера"
+				/>
+	</Grid>
+	
+</UserControl>

@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:ClientApp.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ClientApp.Views.ConnectionWindowView"
+		x:DataType="vm:ConnectionWindowViewModel"
+        Title="ConnectionWindowView" WindowStartupLocation="CenterOwner" Height="450" Width="800">
+
+	<Design.DataContext>
+		<vm:ConnectionWindowViewModel/>
+	</Design.DataContext>
+	
+	<Grid RowDefinitions="*, *">
+		<StackPanel HorizontalAlignment="Center">
+			<TextBlock Text="Введите ip сервера"/>
+			<TextBox Text="{Binding IpAdress}" Width="200"/>
+			<TextBlock Text="Пароль"/>
+			<TextBox PasswordChar="*" Text="{Binding Password}" Width="200"/>
+		</StackPanel>
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+			<Button Width="150" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Подключиться" Command="{Binding ConnectionCommand}"/>
+			
+			<Button Width="150" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Назад" Command="{Binding GoBackCommand}"
+					CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+		</StackPanel>
+	</Grid>
+	
+</Window>

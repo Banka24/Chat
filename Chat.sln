@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.34031.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerChat", ""D:\learn\C#\Chat\Chat.Server\Chat.Server.csproj"", "{A3699F81-74A0-4DBC-A8BF-B5022FF6D03B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Server", "D:\learn\C#\Chat\Chat.Server\Chat.Server.csproj", "{A3699F81-74A0-4DBC-A8BF-B5022FF6D03B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientChat", ""D:\learn\C#\Chat\Chat\Chat.Client.csproj"", "{8B6DF790-902F-4F08-9118-3001E0EA7C2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Client", "D:\learn\C#\Chat\Chat\Chat.Client.csproj", "{8B6DF790-902F-4F08-9118-3001E0EA7C2B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "ClientApp\ClientApp.csproj", "{634535CA-6636-443A-9C63-6141506BDB41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8B6DF790-902F-4F08-9118-3001E0EA7C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B6DF790-902F-4F08-9118-3001E0EA7C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B6DF790-902F-4F08-9118-3001E0EA7C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634535CA-6636-443A-9C63-6141506BDB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634535CA-6636-443A-9C63-6141506BDB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634535CA-6636-443A-9C63-6141506BDB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634535CA-6636-443A-9C63-6141506BDB41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
