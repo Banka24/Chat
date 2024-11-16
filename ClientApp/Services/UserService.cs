@@ -5,20 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ClientApp.Services
 {
     public class UserService : IUserService
     {
         private const string PATH = @"~\Infrastructure\UserData.json";
-        public User Authorization(string login, string password)
+        public async Task<User> Authorization(string login, string password)
         {
             if (File.Exists(PATH))
             {
                 try
                 {
-                    string jsonContent = File.ReadAllText(PATH);
-                    var users = JsonConvert.DeserializeObject<IEnumerable<User>>(jsonContent) ?? Enumerable.Empty<User>();
+                    string jsonContent = await File.ReadAllTextAsync(PATH);
+                    var users = JsonConvert.DeserializeObject<IEnumerable<User>>(jsonContent) ?? [];
                     var user = users.FirstOrDefault(u => u.Login == login && u.Password == password);
                     return user ?? null!;
                 }
@@ -37,13 +38,14 @@ namespace ClientApp.Services
             return null!;
         }
 
-        public bool Registration(string login, string password)
+        public async Task<bool> RegistrationAsync(string login, string password)
         {
             var user = new User(login, password);
             string json = JsonConvert.SerializeObject(user, Formatting.Indented);
+
             try
             {
-                File.WriteAllText(PATH, json);
+                await File.WriteAllTextAsync(PATH, json);
             }
             catch (Exception ex)
             {

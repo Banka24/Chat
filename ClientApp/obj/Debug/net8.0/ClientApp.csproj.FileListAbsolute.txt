@@ -71,3 +71,5 @@ D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\ref\ClientApp.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\ValidationRules.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\ValidationRules.pdb

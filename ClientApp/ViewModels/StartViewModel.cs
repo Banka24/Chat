@@ -1,5 +1,4 @@
-﻿using ClientApp.Views;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
 namespace ClientApp.ViewModels
@@ -9,7 +8,7 @@ namespace ClientApp.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand RegistartionCommand { get; }
 
-        public StartViewModel() : base()
+        public StartViewModel()
         {
             LoginCommand = new RelayCommand(ExecuteLogin);
             RegistartionCommand = new RelayCommand(ExecuteRegistration);
@@ -22,7 +21,7 @@ namespace ClientApp.ViewModels
 
         private void ExecuteRegistration()
         {
-            CurrentViewModel = new RegistrationView();
+            NavigationService.NavigateTo(new RegistrationViewModel());
         }
     }
 }

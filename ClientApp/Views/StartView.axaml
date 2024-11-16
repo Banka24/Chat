@@ -8,7 +8,8 @@
              x:Class="ClientApp.Views.StartView">
 	
 	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-		<Button Content="Войти" Command="{Binding LoginCommand}" Margin="0, 25" Width="200" HorizontalContentAlignment="Center"/>
+		<Button Content="Войти" Command="{Binding LoginCommand}" Margin="0, 25" 
+				Width="200" HorizontalContentAlignment="Center"/>
 		<Button Content="Регистрация" Margin="0, 25" Width="200" HorizontalContentAlignment="Center"
 				Command="{Binding RegistartionCommand}"/>
 	</StackPanel>

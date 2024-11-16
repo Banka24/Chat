@@ -1,12 +1,18 @@
-﻿using ClientApp.Views;
-
-namespace ClientApp.ViewModels
+﻿namespace ClientApp.ViewModels
 {
-    public partial class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel() : base()
+        private ViewModelBase _currentViewModel = null!;
+        public ViewModelBase CurrentViewModel
         {
-            CurrentViewModel = new StartView();
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value, nameof(CurrentViewModel));
+        }
+
+        public MainWindowViewModel()
+        {
+            NavigationService.LoadStartViewModel(this);
+            NavigationService.NavigateTo(new StartViewModel());
         }
     }
 }

@@ -27,7 +27,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj": {
+                "projectPath": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -47,23 +51,23 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
             },
             "Avalonia.Fonts.Inter": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
             },
             "Avalonia.Themes.Fluent": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -82,6 +86,66 @@
               "version": "[13.0.3, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj",
+        "projectName": "ValidationRules",
+        "projectPath": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj",
+        "packagesPath": "C:\\Users\\Banka\\.nuget\\packages\\",
+        "outputPath": "D:\\learn\\C#\\Chat\\ValidationRules\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Banka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",

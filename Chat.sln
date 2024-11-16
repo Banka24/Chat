@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Client", "D:\learn\C#\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "ClientApp\ClientApp.csproj", "{634535CA-6636-443A-9C63-6141506BDB41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationRules", "ValidationRules\ValidationRules.csproj", "{3FB4A4D9-B7A5-4ECA-A246-10ED89002C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{634535CA-6636-443A-9C63-6141506BDB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{634535CA-6636-443A-9C63-6141506BDB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{634535CA-6636-443A-9C63-6141506BDB41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB4A4D9-B7A5-4ECA-A246-10ED89002C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB4A4D9-B7A5-4ECA-A246-10ED89002C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB4A4D9-B7A5-4ECA-A246-10ED89002C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB4A4D9-B7A5-4ECA-A246-10ED89002C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

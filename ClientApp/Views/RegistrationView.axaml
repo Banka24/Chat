@@ -9,7 +9,7 @@
 
 	<Grid RowDefinitions="*, *">
 		<StackPanel HorizontalAlignment="Center" Margin="0, 150">
-			<TextBlock Text="{Binding Error, FallbackValue=''}" />
+			<TextBlock Text="{Binding Message}" Foreground="{Binding MessageColor}"/>
 			<TextBlock Text="Логин"/>
 			<TextBox Text="{Binding Login}" Width="200"/>
 			<TextBlock Text="Пароль"/>
@@ -18,11 +18,11 @@
 		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
 			<Button Width="170" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Content="Зарегистрироваться" Command="{Binding }"/>
+					Content="Зарегистрироваться" Command="{Binding RegistrationCommand}"/>
 
 			<Button Width="170" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Content="Назад" Command="{Binding }"/>
+					Content="Назад" Command="{Binding GoBackCommand}"/>
 		</StackPanel>
 	</Grid>
 	

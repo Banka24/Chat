@@ -18,8 +18,8 @@ namespace ClientApp
         {
             var services = new ServiceCollection();
             services.AddScoped<ISecurityService, SecurityService>();
-            services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<INavigationService, NavigationService>();
             ServiceProvider = services.BuildServiceProvider();
 
             AvaloniaXamlLoader.Load(this);
@@ -32,7 +32,7 @@ namespace ClientApp
                 BindingPlugins.DataValidators.RemoveAt(0);
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel()
                 };
             }
 
