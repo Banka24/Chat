@@ -1,8 +1,8 @@
-﻿using ClientApp.Models.Entity;
+﻿using ClientApp.Infrastructure;
+using ClientApp.Models.Entity;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,26 +12,28 @@ namespace ClientApp.ViewModels
     public class FavoriteServersViewModel : ViewModelBase
     {
         private Server _selectedServer = null!;
-        public ObservableCollection<Server> Servers { get; set; } = null!;
-
+        private ICollection<Server> _servers = null!;
         public ICommand ConnectionCommand { get; }
-
+        public ICollection<Server> Servers
+        {
+            get => _servers;
+            set => SetProperty(ref _servers, value);
+        }
         public Server Server
         {
             get => _selectedServer;
             set => SetProperty(ref _selectedServer, value);
         }
-
         public FavoriteServersViewModel()
         {
             ConnectionCommand = new RelayCommand(ExecuteConnection);
-            _ = Task.Run(async () => Servers = (ObservableCollection<Server>)await LoadServers());
+            _ = Task.Run(async () => Servers = await LoadServers());
         }
 
         private void ExecuteConnection()
         {
-            System.Diagnostics.Debug.WriteLine("Идёт подключение");
-            return;
+            LocalStorage.IpAdress = Server.IpAdress;
+            NavigationService.NavigateTo(new ConnectionViewModel());
         }
 
         private static async Task<ICollection<Server>> LoadServers()
@@ -42,8 +44,8 @@ namespace ClientApp.ViewModels
                 try
                 {
                     string jsonContent = await File.ReadAllTextAsync(path);
-                    var serversCollection = JsonConvert.DeserializeObject<ServersCollection>(jsonContent);
-                    return serversCollection?.Servers ?? null!;
+                    var serversCollection = JsonConvert.DeserializeObject<ICollection<Server>>(jsonContent);
+                    return serversCollection ?? null!;
                 }
                 catch (IOException ex)
                 {

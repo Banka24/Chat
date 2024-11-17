@@ -1,5 +1,4 @@
 ﻿using ClientApp.Infrastructure;
-using ClientApp.Views;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
@@ -19,12 +18,7 @@ namespace ClientApp.ViewModels
 
         private void ExecuteOpenConnectionWindow()
         {
-            var connectionWidnow = new ConnectionWindowView();
-            connectionWidnow.Show();
-            if (!connectionWidnow.IsActive)
-            {
-                System.Diagnostics.Debug.WriteLine("Окно закрыто");
-            }
+            NavigationService.NavigateTo(new ConnectionViewModel());
         }
 
         private void ExecuteOpenServerFavorite()

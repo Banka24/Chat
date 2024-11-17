@@ -1,3 +1,17 @@
-{
-  
-}
+[
+  {
+    "Id": "a0eeb8c7-3bfa-4b5f-8d45-0f1b0e5b9e3e",
+    "Name": "Server1",
+    "IpAdress": "192.168.1.1"
+  },
+  {
+    "Id": "b1d4e8c5-4fba-4a9f-8e9e-1f2b6c8a8c3d",
+    "Name": "Server2",
+    "IpAdress": "192.168.1.2"
+  },
+  {
+    "Id": "c2f6e9d3-5cfa-4b6f-8f9e-2f3b7d9b9d4e",
+    "Name": "Server3",
+    "IpAdress": "192.168.1.3"
+  }
+]

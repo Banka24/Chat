@@ -8,9 +8,15 @@
              x:Class="ClientApp.Views.FavoriteServersView">
 
 	<Grid RowDefinitions="*, 60">
-		<ListBox ItemsSource="{Binding Servers}" SelectionMode="Single" SelectedItem="{Binding}"/>
+		<ListBox ItemsSource="{Binding Servers}" SelectionMode="Single" SelectedItem="{Binding Server}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 		<StackPanel Grid.Row="1" HorizontalAlignment="Center">
-			<Button Content="Подключиться"/>
+			<Button Content="Подключиться" Command="{Binding ConnectionCommand}"/>
 			<Button Content="Назад" Command="{Binding GoBackCommand}"/>
 		</StackPanel>
 	</Grid>
