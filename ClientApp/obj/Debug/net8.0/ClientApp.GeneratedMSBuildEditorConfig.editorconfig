@@ -26,7 +26,13 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/learn/C\#/Chat/ClientApp/Views/ConnectionWindowView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/learn/C\#/Chat/ClientApp/Views/FavoriteServersView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/learn/C\#/Chat/ClientApp/Views/HomeView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/learn/C\#/Chat/ClientApp/Views/LoginView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/learn/C\#/Chat/ClientApp/Views/MainWindow.axaml]

@@ -20,7 +20,7 @@ namespace ClientApp.Services
 
         public void GoBack()
         {
-            if (_viewModels.Count <= 0) return;
+            if (_viewModels.Count <= 1) return;
             _viewModels.Pop();
             _startViewModel.CurrentViewModel = _viewModels.Peek();
         }

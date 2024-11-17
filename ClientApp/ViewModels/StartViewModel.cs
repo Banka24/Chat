@@ -16,7 +16,7 @@ namespace ClientApp.ViewModels
 
         private void ExecuteLogin()
         {
-            //CurrentViewModel = NavigationService.NavigateTo(new Login);
+            NavigationService.NavigateTo(new LoginViewModel());
         }
 
         private void ExecuteRegistration()

@@ -2,25 +2,23 @@
 using ClientApp.Models.Entity;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ClientApp.Services
 {
     public class UserService : IUserService
     {
-        private const string PATH = @"~\Infrastructure\UserData.json";
-        public async Task<User> Authorization(string login, string password)
+        //private readonly string _path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "UserData.json";
+        private readonly string _path = @"D:\learn\C#\Chat\ClientApp\Infrastructure\UserData.json";
+        public async Task<User> GetUserInfoAsync(string login)
         {
-            if (File.Exists(PATH))
+            if (File.Exists(_path))
             {
                 try
                 {
-                    string jsonContent = await File.ReadAllTextAsync(PATH);
-                    var users = JsonConvert.DeserializeObject<IEnumerable<User>>(jsonContent) ?? [];
-                    var user = users.FirstOrDefault(u => u.Login == login && u.Password == password);
+                    string jsonContent = await File.ReadAllTextAsync(_path);
+                    var user = JsonConvert.DeserializeObject<User>(jsonContent);
                     return user ?? null!;
                 }
                 catch (IOException ex)
@@ -34,7 +32,6 @@ namespace ClientApp.Services
                     return null!;
                 }
             }
-
             return null!;
         }
 
@@ -45,7 +42,11 @@ namespace ClientApp.Services
 
             try
             {
-                await File.WriteAllTextAsync(PATH, json);
+                if (!File.Exists(_path))
+                {
+                    using var stream = File.Create(_path);
+                }
+                await File.WriteAllTextAsync(_path, json);
             }
             catch (Exception ex)
             {

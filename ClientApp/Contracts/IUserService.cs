@@ -5,7 +5,7 @@ namespace ClientApp.Contracts
 {
     public interface IUserService
     {
-        Task<User> Authorization(string login, string password);
+        Task<User> GetUserInfoAsync(string login);
         Task<bool> RegistrationAsync(string login, string password);
     }
 }

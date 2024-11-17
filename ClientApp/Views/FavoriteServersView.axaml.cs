@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace ClientApp.Views;
 
-public partial class RegistrationView : UserControl
+public partial class FavoriteServersView : UserControl
 {
-    public RegistrationView()
+    public FavoriteServersView()
     {
         InitializeComponent();
     }

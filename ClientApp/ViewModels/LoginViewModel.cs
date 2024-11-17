@@ -1,18 +1,19 @@
 ﻿using ClientApp.Contracts;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Windows.Input;
+using System;
 using ValidationRules;
+using System.Collections;
+using ClientApp.Infrastructure;
 
 namespace ClientApp.ViewModels
 {
-    public class RegistrationViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class LoginViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ISecurityService _securityService;
         private readonly IUserService _userService;
@@ -24,7 +25,7 @@ namespace ClientApp.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        public ICommand RegistrationCommand { get; }
+        public ICommand LoginCommand { get; }
 
         [ValidLogin]
         public string Login
@@ -58,32 +59,40 @@ namespace ClientApp.ViewModels
                 SetProperty(ref _password, value);
                 ValidateProperty(nameof(Password));
             }
-            
+
         }
 
         public bool HasErrors => _errors.Count > 0;
 
-        public RegistrationViewModel()
+        public LoginViewModel()
         {
             _securityService = App.ServiceProvider.GetService<ISecurityService>()!;
             _userService = App.ServiceProvider.GetRequiredService<IUserService>();
-            RegistrationCommand = new RelayCommand(ExecuteRegistration);
+            LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
-        private async void ExecuteRegistration()
+        private async void ExecuteLogin()
         {
-            string password = _securityService.HashPasswordUser(Password);
-            bool registrationStatus = await _userService.RegistrationAsync(Login, password);
-            if (registrationStatus)
-            {
-                MessageColor = "Green";
-                Message = "Аккаунт зарегестрирован";
-            }
-            else
+            var user = await _userService.GetUserInfoAsync(Login);
+
+            if (user == null)
             {
                 MessageColor = "Red";
-                Message = "Произошла ошибка";
+                Message = "Неверен логин или пароль";
+                return;
             }
+
+            bool verify = _securityService.VerifyUser(Password, user.Password);
+
+            if (verify)
+            {
+                LocalStorage.Login = user.Login;
+                NavigationService.NavigateTo(new HomeViewModel());
+                return;
+            }
+
+            MessageColor = "Red";
+            Message = "Неверен логин или пароль";
         }
 
         private void ValidateProperty(string propertyName)
