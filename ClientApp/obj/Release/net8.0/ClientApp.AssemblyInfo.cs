@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Chat.Client")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("ClientApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f1e236a11ae35d0858c949c32b288b726498bb5")]
-[assembly: System.Reflection.AssemblyProductAttribute("Chat.Client")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Chat.Client")]
+[assembly: System.Reflection.AssemblyProductAttribute("ClientApp")]
+[assembly: System.Reflection.AssemblyTitleAttribute("ClientApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.
