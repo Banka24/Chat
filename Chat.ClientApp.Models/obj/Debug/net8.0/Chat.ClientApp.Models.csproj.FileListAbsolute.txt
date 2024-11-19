@@ -1,0 +1,12 @@
+D:\learn\C#\Chat\Chat.ClientApp.Models\bin\Debug\net8.0\Chat.ClientApp.Models.deps.json
+D:\learn\C#\Chat\Chat.ClientApp.Models\bin\Debug\net8.0\Chat.ClientApp.Models.dll
+D:\learn\C#\Chat\Chat.ClientApp.Models\bin\Debug\net8.0\Chat.ClientApp.Models.pdb
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.AssemblyInfoInputs.cache
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.AssemblyInfo.cs
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.csproj.CoreCompileInputs.cache
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.sourcelink.json
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.dll
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\refint\Chat.ClientApp.Models.dll
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\Chat.ClientApp.Models.pdb
+D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\ref\Chat.ClientApp.Models.dll

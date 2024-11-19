@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ValidationRules
+namespace Chat.ClientApp.ValidationRules
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class ValidLoginAttribute : ValidationAttribute

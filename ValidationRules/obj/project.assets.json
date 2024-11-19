@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj",
-      "projectName": "ValidationRules",
-      "projectPath": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj",
+      "projectUniqueName": "D:\\learn\\C#\\Chat\\ValidationRules\\Chat.ClientApp.ValidationRules.csproj",
+      "projectName": "Chat.ClientApp.ValidationRules",
+      "projectPath": "D:\\learn\\C#\\Chat\\ValidationRules\\Chat.ClientApp.ValidationRules.csproj",
       "packagesPath": "C:\\Users\\Banka\\.nuget\\packages\\",
       "outputPath": "D:\\learn\\C#\\Chat\\ValidationRules\\obj\\",
       "projectStyle": "PackageReference",
