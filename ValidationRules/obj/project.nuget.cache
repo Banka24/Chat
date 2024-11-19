@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+d+JFZzhzSk=",
+  "dgSpecHash": "iW3UtZx7NN4=",
   "success": true,
-  "projectFilePath": "D:\\learn\\C#\\Chat\\ValidationRules\\ValidationRules.csproj",
+  "projectFilePath": "D:\\learn\\C#\\Chat\\ValidationRules\\Chat.ClientApp.ValidationRules.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

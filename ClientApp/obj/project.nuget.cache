@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7K1C06s+4J0=",
+  "dgSpecHash": "d7kBqUkwfZo=",
   "success": true,
-  "projectFilePath": "D:\\learn\\C#\\Chat\\ClientApp\\ClientApp.csproj",
+  "projectFilePath": "D:\\learn\\C#\\Chat\\ClientApp\\Chat.ClientApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia\\11.2.1\\avalonia.11.2.1.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.22045.20230930\\avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

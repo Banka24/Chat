@@ -3,8 +3,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using ClientApp.Contracts;
-using ClientApp.Services;
+using Chat.ClientApp.Services;
+using Chat.ClientApp.Services.Contracts;
 using ClientApp.ViewModels;
 using ClientApp.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +19,7 @@ namespace ClientApp
             var services = new ServiceCollection();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IServerService, ServerService>();
             services.AddSingleton<INavigationService, NavigationService>();
             ServiceProvider = services.BuildServiceProvider();
 

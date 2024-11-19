@@ -1,9 +1,11 @@
-﻿namespace ClientApp.ViewModels
+﻿using System.ComponentModel;
+
+namespace ClientApp.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private ViewModelBase _currentViewModel = null!;
-        public ViewModelBase CurrentViewModel
+        private INotifyPropertyChanged _currentViewModel = null!;
+        public override INotifyPropertyChanged CurrentViewModel
         {
             get => _currentViewModel;
             set => SetProperty(ref _currentViewModel, value, nameof(CurrentViewModel));

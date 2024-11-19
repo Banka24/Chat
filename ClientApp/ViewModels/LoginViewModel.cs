@@ -1,5 +1,4 @@
-﻿using ClientApp.Contracts;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -7,9 +6,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Windows.Input;
 using System;
-using ValidationRules;
 using System.Collections;
 using ClientApp.Infrastructure;
+using Chat.ClientApp.Services.Contracts;
+using Chat.ClientApp.ValidationRules;
 
 namespace ClientApp.ViewModels
 {
@@ -75,7 +75,7 @@ namespace ClientApp.ViewModels
         {
             var user = await _userService.GetUserInfoAsync(Login);
 
-            if (user == null)
+            if (user == null || user.Login != Login)
             {
                 MessageColor = "Red";
                 Message = "Неверен логин или пароль";

@@ -1,4 +1,5 @@
-﻿using ClientApp.Contracts;
+﻿using Chat.ClientApp.Services.Contracts;
+using Chat.ClientApp.ValidationRules;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -8,7 +9,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Input;
-using ValidationRules;
 
 namespace ClientApp.ViewModels
 {
