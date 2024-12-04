@@ -9,7 +9,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="ClientApp" WindowStartupLocation="CenterScreen"
 		MaxHeight="1440" MaxWidth="2560" MinHeight="720" MinWidth="1280"
-		Width="1920" Height="1080">
+		Width="1800" Height="960">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>

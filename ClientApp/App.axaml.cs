@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Chat.Client;
 using Chat.ClientApp.Services;
 using Chat.ClientApp.Services.Contracts;
 using ClientApp.ViewModels;
@@ -21,6 +22,7 @@ namespace ClientApp
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IServerService, ServerService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddScoped<IChatClient, ChatClient>();
             ServiceProvider = services.BuildServiceProvider();
 
             AvaloniaXamlLoader.Load(this);

@@ -4,13 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:ClientApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
-			 x:DataType="vm:ChatViewModel"
+             x:DataType="vm:ChatViewModel"
              x:Class="ClientApp.Views.ChatView">
 	<Grid RowDefinitions="60, *, 60">
 		<StackPanel Orientation="Horizontal">
-			<TextBlock Text="{Binding ServerName}"/>
+			<Button Content="Назад" Command="{Binding GoBackCommand}"/>
+			<TextBlock Text="{Binding ServerName}" FontWeight="Bold" FontSize="16"/>
 		</StackPanel>
-		<ListBox Grid.Row="1"/>
-		<TextBox Grid.Row="2" TextWrapping="Wrap"/>
+		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}"/>
+		<StackPanel Grid.Row="2" Orientation="Horizontal">
+			<TextBox Text="{Binding UserMessage, UpdateSourceTrigger=PropertyChanged}"
+                     Width="1810" AcceptsReturn="True"
+                     Watermark="Сообщение"/>
+			<Button Margin="10, 5, 5, 5" Content="Отправить"
+                    Command="{Binding SendMessageCommand}"/>
+		</StackPanel>
 	</Grid>
 </UserControl>

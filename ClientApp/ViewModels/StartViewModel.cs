@@ -5,8 +5,8 @@ namespace ClientApp.ViewModels
 {
     public class StartViewModel : ViewModelBase
     {
-        public ICommand LoginCommand { get; }
-        public ICommand RegistartionCommand { get; }
+        public IRelayCommand LoginCommand { get; }
+        public IRelayCommand RegistartionCommand { get; }
 
         public StartViewModel()
         {

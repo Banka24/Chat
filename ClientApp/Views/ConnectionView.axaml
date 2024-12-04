@@ -7,14 +7,15 @@
 			 x:DataType="vm:ConnectionViewModel"
              x:Class="ClientApp.Views.ConnectionView">
 	
-	<Grid RowDefinitions="*, *">
-		<StackPanel HorizontalAlignment="Center">
+	<Grid RowDefinitions="60, *, *">
+		<TextBlock HorizontalAlignment="Center" Text="{Binding ErrorMessage}" Foreground="Red"/>
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center">
 			<TextBlock Text="Введите ip сервера"/>
-			<TextBox Text="{Binding IpAdress}" Width="200"/>
+			<TextBox Text="{Binding IpAddress}" Width="200"/>
 			<TextBlock Text="Пароль"/>
 			<TextBox PasswordChar="*" Text="{Binding Password}" Width="200"/>
 		</StackPanel>
-		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+		<StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
 			<Button Width="150" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
 					Content="Подключиться" Command="{Binding ConnectionCommand}"/>

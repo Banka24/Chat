@@ -5,7 +5,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ClientApp.ViewModels
 {
@@ -14,7 +13,7 @@ namespace ClientApp.ViewModels
         private readonly IServerService _serverService;
         private Server _selectedServer = null!;
         private ICollection<Server> _servers = null!;
-        public ICommand ConnectionCommand { get; }
+        public IRelayCommand ConnectionCommand { get; }
         public ICollection<Server> Servers
         {
             get => _servers;

@@ -8,13 +8,17 @@ namespace Chat.Server
     {
         private readonly static List<Socket> _connectedClients = [];
 
-        static async Task Main(string[] args)
+        private async static Task Main(string[] args)
+        {
+            await StartWork();
+        }
+
+        private static async Task StartWork()
         {
             using var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, 8888));
             serverSocket.Listen(10);
             Console.WriteLine("Сервер запущен. Ожидание подключений");
-
             while (true)
             {
                 var clientSocket = await serverSocket.AcceptAsync();
@@ -45,7 +49,6 @@ namespace Chat.Server
                     }
 
                     string message = Encoding.UTF8.GetString(buffer, 0, received);
-                    Console.WriteLine($"Сообщение от {userName}: " + message);
 
                     foreach (var otherClient in _connectedClients)
                     {

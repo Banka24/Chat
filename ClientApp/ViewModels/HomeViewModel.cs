@@ -1,13 +1,12 @@
 ﻿using ClientApp.Infrastructure;
 using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 
 namespace ClientApp.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public ICommand OpenConnectionWindowCommand { get; }
-        public ICommand OpenServerFavoriteCommand { get; }
+        public IRelayCommand OpenConnectionWindowCommand { get; }
+        public IRelayCommand OpenServerFavoriteCommand { get; }
         public string Login { get; private set; }
         public HomeViewModel()
         {
