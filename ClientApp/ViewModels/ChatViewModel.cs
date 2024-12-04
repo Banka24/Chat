@@ -47,6 +47,7 @@ namespace ClientApp.ViewModels
             if (!string.IsNullOrWhiteSpace(UserMessage))
             {
                 await ChatClient.SendAsync(Encoding.UTF8.GetBytes(UserMessage), CancellationToken.None);
+
                 Messages.Add($"Я: {UserMessage}");
                 UserMessage = string.Empty;
             }

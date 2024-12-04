@@ -7,9 +7,9 @@ D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.GeneratedMSBuildEditor
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.AssemblyInfoInputs.cache
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.AssemblyInfo.cs
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.csproj.CoreCompileInputs.cache
+D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.sourcelink.json
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.dll
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\refint\Chat.Server.dll
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.pdb
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.genruntimeconfig.cache
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\ref\Chat.Server.dll
-D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\Chat.Server.sourcelink.json

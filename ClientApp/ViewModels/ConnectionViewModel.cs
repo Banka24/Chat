@@ -39,10 +39,18 @@ namespace ClientApp.ViewModels
             ConnectionCommand = new RelayCommand(async () => await ExecuteConnectionCommand());
         }
 
+        public ConnectionViewModel(string ipAddress) : this()
+        {
+            IpAddress = ipAddress;
+        }
+
         private async Task ExecuteConnectionCommand()
         {
             using var cancellationTokenSource = new CancellationTokenSource();
-            var chatClient = App.ServiceProvider.GetRequiredService<IChatClient>();
+
+            var chatClient = App
+                .ServiceProvider
+                .GetRequiredService<IChatClient>();
 
             bool isConnected = await chatClient.ConnectAsync(IpAddress, LocalStorage.Login, cancellationTokenSource.Token);
             if (isConnected)

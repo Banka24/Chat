@@ -16,7 +16,10 @@ namespace ClientApp.ViewModels
 
         protected ViewModelBase()
         {
-            NavigationService = App.ServiceProvider.GetService<INavigationService>()!;
+            NavigationService = App
+                .ServiceProvider
+                .GetService<INavigationService>()!;
+
             GoBackCommand = new RelayCommand(ExecuteBack);
         }
 

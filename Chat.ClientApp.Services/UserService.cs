@@ -6,8 +6,7 @@ namespace Chat.ClientApp.Services
 {
     public class UserService : IUserService
     {
-        //private readonly string _path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "UserData.json";
-        private readonly string _path = @"D:\learn\C#\Chat\ClientApp\Infrastructure\UserData.json";
+        private readonly string _path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "UserData.json";
         public async Task<User> GetUserInfoAsync(string login)
         {
             if (File.Exists(_path))

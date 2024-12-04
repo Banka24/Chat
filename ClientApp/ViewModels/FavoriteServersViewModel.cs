@@ -26,7 +26,10 @@ namespace ClientApp.ViewModels
         }
         public FavoriteServersViewModel()
         {
-            _serverService = App.ServiceProvider.GetRequiredService<IServerService>();
+            _serverService = App
+                .ServiceProvider
+                .GetRequiredService<IServerService>();
+
             ConnectionCommand = new RelayCommand(ExecuteConnection);
             _ = Task.Run(async () => Servers = await _serverService.LoadServers());
         }
@@ -36,7 +39,7 @@ namespace ClientApp.ViewModels
             if (Server != null)
             {
                 LocalStorage.IpAdress = Server.IpAdress;
-                NavigationService.NavigateTo(new ConnectionViewModel());
+                NavigationService.NavigateTo(new ConnectionViewModel(Server.IpAdress));
             }
         }
 

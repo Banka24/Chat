@@ -8,7 +8,8 @@
              x:Class="ClientApp.Views.FavoriteServersView">
 
 	<Grid RowDefinitions="*, 60">
-		<ListBox ItemsSource="{Binding Servers}" SelectionMode="Single" SelectedItem="{Binding Server}">
+		<ListBox ItemsSource="{Binding Servers}" SelectionMode="Single" 
+				 SelectedItem="{Binding Server}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding Name}" />

@@ -8,6 +8,11 @@ namespace Chat.ClientApp.Services
     {
         public async Task<ICollection<Server>> LoadServers()
         {
+            //string path = AppDomain
+            //    .CurrentDomain
+            //    .BaseDirectory
+            //    .ToString() + "Servers.json";
+
             string path = @"D:\learn\C#\Chat\ClientApp\Infrastructure\Servers.json";
             if (File.Exists(path))
             {

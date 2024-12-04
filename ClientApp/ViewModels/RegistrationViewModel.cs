@@ -68,9 +68,11 @@ namespace ClientApp.ViewModels
             _securityService = App
                 .ServiceProvider
                 .GetService<ISecurityService>()!;
+
             _userService = App
                 .ServiceProvider
                 .GetRequiredService<IUserService>();
+
             RegistrationCommand = new RelayCommand(async() => await ExecuteRegistration());
         }
 
