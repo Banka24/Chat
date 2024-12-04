@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace ClientApp.ViewModels
 {
@@ -24,7 +24,7 @@ namespace ClientApp.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        public ICommand RegistrationCommand { get; }
+        public IRelayCommand RegistrationCommand { get; }
 
         [ValidLogin]
         public string Login
@@ -65,12 +65,16 @@ namespace ClientApp.ViewModels
 
         public RegistrationViewModel()
         {
-            _securityService = App.ServiceProvider.GetService<ISecurityService>()!;
-            _userService = App.ServiceProvider.GetRequiredService<IUserService>();
-            RegistrationCommand = new RelayCommand(ExecuteRegistration);
+            _securityService = App
+                .ServiceProvider
+                .GetService<ISecurityService>()!;
+            _userService = App
+                .ServiceProvider
+                .GetRequiredService<IUserService>();
+            RegistrationCommand = new RelayCommand(async() => await ExecuteRegistration());
         }
 
-        private async void ExecuteRegistration()
+        private async Task ExecuteRegistration()
         {
             string password = _securityService.HashPasswordUser(Password);
             bool registrationStatus = await _userService.RegistrationAsync(Login, password);

@@ -4,12 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Windows.Input;
 using System;
 using System.Collections;
 using ClientApp.Infrastructure;
 using Chat.ClientApp.Services.Contracts;
 using Chat.ClientApp.ValidationRules;
+using System.Threading.Tasks;
 
 namespace ClientApp.ViewModels
 {
@@ -25,7 +25,7 @@ namespace ClientApp.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        public ICommand LoginCommand { get; }
+        public IRelayCommand LoginCommand { get; }
 
         [ValidLogin]
         public string Login
@@ -66,19 +66,22 @@ namespace ClientApp.ViewModels
 
         public LoginViewModel()
         {
-            _securityService = App.ServiceProvider.GetService<ISecurityService>()!;
-            _userService = App.ServiceProvider.GetRequiredService<IUserService>();
-            LoginCommand = new RelayCommand(ExecuteLogin);
+            _securityService = App
+                .ServiceProvider
+                .GetService<ISecurityService>()!;
+            _userService = App
+                .ServiceProvider
+                .GetRequiredService<IUserService>();
+            LoginCommand = new RelayCommand(async () => await ExecuteLogin());
         }
 
-        private async void ExecuteLogin()
+        private async Task ExecuteLogin()
         {
             var user = await _userService.GetUserInfoAsync(Login);
 
             if (user == null || user.Login != Login)
             {
-                MessageColor = "Red";
-                Message = "Неверен логин или пароль";
+                SetErrorMessage();
                 return;
             }
 
@@ -91,6 +94,11 @@ namespace ClientApp.ViewModels
                 return;
             }
 
+            SetErrorMessage();
+        }
+
+        private void SetErrorMessage()
+        {
             MessageColor = "Red";
             Message = "Неверен логин или пароль";
         }
