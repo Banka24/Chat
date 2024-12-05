@@ -38,7 +38,6 @@ D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Avalonia.Win32.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Avalonia.X11.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Avalonia.Xaml.Interactivity.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\HarfBuzzSharp.dll
@@ -80,6 +79,3 @@ D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.ValidationRules.pdb
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.Cli.C2613370.Up2Date
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.genruntimeconfig.cache
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\ref\Chat.ClientApp.dll
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.dll
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\refint\Chat.ClientApp.dll
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.pdb

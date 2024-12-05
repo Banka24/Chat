@@ -1,4 +1,4 @@
-﻿using ClientApp.Infrastructure;
+﻿using Chat.ClientApp;
 using CommunityToolkit.Mvvm.Input;
 
 namespace ClientApp.ViewModels

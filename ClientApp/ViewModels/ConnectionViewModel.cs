@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chat.Client;
 using Microsoft.Extensions.DependencyInjection;
-using ClientApp.Infrastructure;
+using Chat.ClientApp;
 
 namespace ClientApp.ViewModels
 {

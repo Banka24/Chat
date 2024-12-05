@@ -1,2 +1,3 @@
 .vs/
-ClientApp/Infrastructure/UserData.json
+Infrastructure/
+ClientApp/bin/

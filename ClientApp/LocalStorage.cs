@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace ClientApp.Infrastructure
+namespace Chat.ClientApp
 {
     public static class LocalStorage
     {
