@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System;
 using System.Collections;
-using ClientApp.Infrastructure;
 using Chat.ClientApp.Services.Contracts;
 using Chat.ClientApp.ValidationRules;
 using System.Threading.Tasks;
+using Chat.ClientApp;
 
 namespace ClientApp.ViewModels
 {

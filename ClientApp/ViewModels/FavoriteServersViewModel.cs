@@ -1,6 +1,6 @@
-﻿using Chat.ClientApp.Models;
+﻿using Chat.ClientApp;
+using Chat.ClientApp.Models;
 using Chat.ClientApp.Services.Contracts;
-using ClientApp.Infrastructure;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;

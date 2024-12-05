@@ -13,7 +13,6 @@
           "Avalonia.Diagnostics": "11.2.2",
           "Avalonia.Fonts.Inter": "11.2.2",
           "Avalonia.Themes.Fluent": "11.2.2",
-          "Avalonia.Xaml.Interactivity": "11.2.0.1",
           "Chat.Client": "1.0.0",
           "Chat.ClientApp.Models": "1.0.0",
           "Chat.ClientApp.Services": "1.0.0",
@@ -261,17 +260,6 @@
           "lib/net8.0/Avalonia.X11.dll": {
             "assemblyVersion": "11.2.2.0",
             "fileVersion": "11.2.2.0"
-          }
-        }
-      },
-      "Avalonia.Xaml.Interactivity/11.2.0.1": {
-        "dependencies": {
-          "Avalonia": "11.2.2"
-        },
-        "runtime": {
-          "lib/net8.0/Avalonia.Xaml.Interactivity.dll": {
-            "assemblyVersion": "11.2.0.1",
-            "fileVersion": "11.2.0.1"
           }
         }
       },
@@ -637,13 +625,6 @@
       "sha512": "sha512-uptryb4T1h6mBgMxRU0B7IX01CjRwT0KvxPbq2ObhF8CgehQPIl52lcAe09CFi+ZEeu3EJi1/Fa1MH4PDsp4Sw==",
       "path": "avalonia.x11/11.2.2",
       "hashPath": "avalonia.x11.11.2.2.nupkg.sha512"
-    },
-    "Avalonia.Xaml.Interactivity/11.2.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1Hy8HmRqFbnlRwH5CHMfReJ8uCIUEs8bsrm+VBH4/otXwjO/K3a4ogw1psATS845v1I2jy3loQhoSlccX0QEsA==",
-      "path": "avalonia.xaml.interactivity/11.2.0.1",
-      "hashPath": "avalonia.xaml.interactivity.11.2.0.1.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.0.3": {
       "type": "package",
