@@ -9,7 +9,7 @@ using System.Collections;
 using Chat.ClientApp.Services.Contracts;
 using Chat.ClientApp.ValidationRules;
 using System.Threading.Tasks;
-using Chat.ClientApp;
+using Chat.ClientApp.Models;
 
 namespace ClientApp.ViewModels
 {
@@ -91,7 +91,11 @@ namespace ClientApp.ViewModels
 
             if (verify)
             {
-                LocalStorage.Login = user.Login;
+                var appUser = App
+                    .ServiceProvider
+                    .GetRequiredService<User>();
+
+                appUser.Login = user.Login;
                 NavigationService.NavigateTo(new HomeViewModel());
                 return;
             }

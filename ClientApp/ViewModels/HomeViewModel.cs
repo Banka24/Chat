@@ -1,5 +1,6 @@
-﻿using Chat.ClientApp;
+﻿using Chat.ClientApp.Models;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClientApp.ViewModels
 {
@@ -7,17 +8,28 @@ namespace ClientApp.ViewModels
     {
         public IRelayCommand OpenConnectionWindowCommand { get; }
         public IRelayCommand OpenServerFavoriteCommand { get; }
+        public IRelayCommand OpenStartServerCommand { get; }
         public string Login { get; private set; }
         public HomeViewModel()
         {
-            Login = LocalStorage.Login;
-            OpenConnectionWindowCommand = new RelayCommand(ExecuteOpenConnectionWindow);
+            Login = App
+                .ServiceProvider
+                .GetRequiredService<User>()
+                .Login;
+
+            OpenConnectionWindowCommand = new RelayCommand(ExecuteOpenConnection);
             OpenServerFavoriteCommand = new RelayCommand(ExecuteOpenServerFavorite);
+            OpenStartServerCommand = new RelayCommand(ExecuteOpenStartServer);
         }
 
-        private void ExecuteOpenConnectionWindow()
+        private void ExecuteOpenConnection()
         {
             NavigationService.NavigateTo(new ConnectionViewModel());
+        }
+
+        private void ExecuteOpenStartServer()
+        {
+            NavigationService.NavigateTo(new ServerStartViewModel());
         }
 
         private void ExecuteOpenServerFavorite()

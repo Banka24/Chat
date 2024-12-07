@@ -1,5 +1,4 @@
-﻿using Chat.ClientApp;
-using Chat.ClientApp.Models;
+﻿using Chat.ClientApp.Models;
 using Chat.ClientApp.Services.Contracts;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,15 +37,8 @@ namespace ClientApp.ViewModels
         {
             if (Server != null)
             {
-                LocalStorage.IpAdress = Server.IpAdress;
                 NavigationService.NavigateTo(new ConnectionViewModel(Server.IpAdress));
             }
-        }
-
-        protected override void ExecuteBack()
-        {
-            LocalStorage.IpAdress = string.Empty;
-            base.ExecuteBack();
         }
     }
 }

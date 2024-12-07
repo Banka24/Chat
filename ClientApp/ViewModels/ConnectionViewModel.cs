@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Chat.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Chat.ClientApp;
+using Chat.ClientApp.Models;
 
 namespace ClientApp.ViewModels
 {
@@ -52,12 +53,17 @@ namespace ClientApp.ViewModels
                 .ServiceProvider
                 .GetRequiredService<IChatClient>();
 
-            bool isConnected = await chatClient.ConnectAsync(IpAddress, LocalStorage.Login, cancellationTokenSource.Token);
+            var login = App
+                .ServiceProvider
+                .GetRequiredService<User>()
+                .Login;
+
+            bool isConnected = await chatClient.ConnectAsync(IpAddress, Password, login, cancellationTokenSource.Token);
             if (isConnected)
             {
                 var chatViewModel = new ChatViewModel(chatClient)
                 {
-                    ServerName = IpAddress,
+                    ServerName = chatClient.ServerName,
                 };
 
                 NavigationService.NavigateTo(chatViewModel);

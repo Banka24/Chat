@@ -9,10 +9,19 @@ namespace Chat.Client
     {
         private string _userName = string.Empty;
         private Socket _clientSocket = null!;
+        private string _connectedServerName = string.Empty;
+        public string ServerName => _connectedServerName;
 
         public event Action<string> MessageReceived = null!;
 
-        public async Task<bool> ConnectAsync(string ipAddress, string userName, CancellationToken cancellationToken)
+        public async Task<string> GetServerNameAsync(CancellationToken cancellationToken)
+        {
+            byte[] serverNameBuffer = new byte[1024];
+            int serverNameLength = await _clientSocket.ReceiveAsync(serverNameBuffer, SocketFlags.None, cancellationToken);
+            return Encoding.UTF8.GetString(serverNameBuffer, 0, serverNameLength);
+        }
+
+        public async Task<bool> ConnectAsync(string ipAddress, string password, string userName, CancellationToken cancellationToken)
         {
             _userName = userName;
             _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -23,6 +32,22 @@ namespace Chat.Client
 
                 var nameBytes = Encoding.UTF8.GetBytes(_userName);
                 await SendAsync(nameBytes, cancellationToken);
+
+                var passwordBytes = Encoding.UTF8.GetBytes(password);
+                await SendAsync(passwordBytes, cancellationToken);
+
+                _connectedServerName = await GetServerNameAsync(cancellationToken);
+
+                byte[] responseBuffer = new byte[1024];
+                int responseLength = await _clientSocket.ReceiveAsync(responseBuffer, SocketFlags.None, cancellationToken);
+                string responseMessage = Encoding.UTF8.GetString(responseBuffer, 0, responseLength);
+
+                if (responseMessage == "Неверный пароль. Подключение закрыто.")
+                {
+                    WriteLine("Ошибка: неверный пароль.");
+                    _clientSocket.Close();
+                    return false;
+                }
 
                 _ = ReceiveMessagesAsync(cancellationToken);
                 return true;

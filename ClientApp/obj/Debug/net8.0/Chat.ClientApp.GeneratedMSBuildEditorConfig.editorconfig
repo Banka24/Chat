@@ -44,5 +44,8 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/learn/C\#/Chat/ClientApp/Views/RegistrationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/learn/C\#/Chat/ClientApp/Views/ServerStartView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/learn/C\#/Chat/ClientApp/Views/StartView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

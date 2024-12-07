@@ -691,6 +691,16 @@
         "runtime": {
           "bin/placeholder/Chat.ClientApp.ValidationRules.dll": {}
         }
+      },
+      "Chat.Server/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Chat.Server.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chat.Server.dll": {}
+        }
       }
     }
   },
@@ -1722,6 +1732,11 @@
       "type": "project",
       "path": "../ValidationRules/Chat.ClientApp.ValidationRules.csproj",
       "msbuildProject": "../ValidationRules/Chat.ClientApp.ValidationRules.csproj"
+    },
+    "Chat.Server/1.0.0": {
+      "type": "project",
+      "path": "../Chat.Server/Chat.Server.csproj",
+      "msbuildProject": "../Chat.Server/Chat.Server.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1735,6 +1750,7 @@
       "Chat.ClientApp.Models >= 1.0.0",
       "Chat.ClientApp.Services >= 1.0.0",
       "Chat.ClientApp.ValidationRules >= 1.0.0",
+      "Chat.Server >= 1.0.0",
       "CommunityToolkit.Mvvm >= 8.3.2",
       "Microsoft.Extensions.DependencyInjection >= 9.0.0"
     ]
@@ -1774,6 +1790,9 @@
             },
             "D:\\learn\\C#\\Chat\\Chat.Client\\Chat.Client.csproj": {
               "projectPath": "D:\\learn\\C#\\Chat\\Chat.Client\\Chat.Client.csproj"
+            },
+            "D:\\learn\\C#\\Chat\\Chat.Server\\Chat.Server.csproj": {
+              "projectPath": "D:\\learn\\C#\\Chat\\Chat.Server\\Chat.Server.csproj"
             },
             "D:\\learn\\C#\\Chat\\ValidationRules\\Chat.ClientApp.ValidationRules.csproj": {
               "projectPath": "D:\\learn\\C#\\Chat\\ValidationRules\\Chat.ClientApp.ValidationRules.csproj"
