@@ -1,14 +1,12 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Chat.Client;
+using Chat.ClientApp.Models;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 using System.Threading.Tasks;
-using Chat.Client;
-using Microsoft.Extensions.DependencyInjection;
-using Chat.ClientApp;
-using Chat.ClientApp.Models;
 
 namespace ClientApp.ViewModels
 {
-
     public class ConnectionViewModel : ViewModelBase
     {
         private string _ipAddress = string.Empty;

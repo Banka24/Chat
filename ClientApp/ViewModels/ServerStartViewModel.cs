@@ -1,6 +1,7 @@
 ﻿using Chat.ClientApp;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using Tmds.DBus.Protocol;
 
 namespace ClientApp.ViewModels
 {
@@ -10,6 +11,7 @@ namespace ClientApp.ViewModels
         private string _serverName = string.Empty;
         private string _serverPassword = string.Empty;
         private bool _serverWork = false;
+
         public IRelayCommand StartCommand { get; }
         public IRelayCommand StopCommand { get; }
 
@@ -30,6 +32,7 @@ namespace ClientApp.ViewModels
             get => _serverPassword;
             set => SetProperty(ref _serverPassword, value);
         }
+
         public bool ServerWork
         {
             get => _serverWork;
@@ -44,22 +47,26 @@ namespace ClientApp.ViewModels
 
         private async Task StartServerExecute()
         {
-            await ServerManager.StartServer(ServerName, ServerPassword);
-            await ShowMessage("Сервер уже запущен.");
             ServerWork = true;
+            await ShowMessage("Сервер запущен.");
+
+             await ServerManager
+                .StartServer(ServerName, ServerPassword)
+                .ConfigureAwait(false);
         }
 
         private async Task StopServerExecute()
         {
+            Message = "Остановка сервера";
             ServerManager.StopServer();
-            await ShowMessage("Сервер остановлен.");
             ServerWork = false;
+            await ShowMessage("Сервер остановлен.");
         }
 
         private async Task ShowMessage(string message)
         {
             Message = message;
-            await Task.Delay(5000);
+            await Task.Delay(5000).ConfigureAwait(false);
             Message = string.Empty;
         }
     }

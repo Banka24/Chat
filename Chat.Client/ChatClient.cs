@@ -36,8 +36,6 @@ namespace Chat.Client
                 var passwordBytes = Encoding.UTF8.GetBytes(password);
                 await SendAsync(passwordBytes, cancellationToken);
 
-                _connectedServerName = await GetServerNameAsync(cancellationToken);
-
                 byte[] responseBuffer = new byte[1024];
                 int responseLength = await _clientSocket.ReceiveAsync(responseBuffer, SocketFlags.None, cancellationToken);
                 string responseMessage = Encoding.UTF8.GetString(responseBuffer, 0, responseLength);
@@ -48,6 +46,8 @@ namespace Chat.Client
                     _clientSocket.Close();
                     return false;
                 }
+
+                _connectedServerName = responseMessage;
 
                 _ = ReceiveMessagesAsync(cancellationToken);
                 return true;

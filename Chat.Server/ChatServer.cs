@@ -1,12 +1,13 @@
-﻿using System.Net.Sockets;
+﻿using System.Collections.Concurrent;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace Chat.Server
 {
     public class ChatServer : IChatServer
     {
-        private readonly List<Socket> _connectedClients = [];
+        private readonly ConcurrentDictionary<Socket, string> _connectedClients = [];
         private string _serverName = string.Empty;
         private string _serverPassword = string.Empty;
         private bool _isRunning = false;
@@ -19,15 +20,22 @@ namespace Chat.Server
             _serverName = serverName;
             _serverPassword = serverPassword;
             _isRunning = true;
-            await StartWorkAsync();
+
+            try
+            {
+                await StartWorkAsync()
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return;
+            }
         }
 
         public void Stop()
         {
-            if (_isRunning)
-            {
-                _isRunning = false; 
-            }
+            _isRunning = false;
         }
 
         private async Task StartWorkAsync()
@@ -35,11 +43,21 @@ namespace Chat.Server
             using var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, 8888));
             serverSocket.Listen(10);
-            Console.WriteLine("Сервер запущен. Ожидание подключений");
 
             while (_isRunning)
             {
-                var clientSocket = await serverSocket.AcceptAsync();
+                var acceptTask = serverSocket.AcceptAsync();
+                var timeoutTask = Task.Delay(
+                    TimeSpan.FromSeconds(30)
+                );
+
+                var completedTask = await Task
+                    .WhenAny(acceptTask, timeoutTask)
+                    .ConfigureAwait(false);
+
+                if (completedTask == timeoutTask) continue;
+
+                var clientSocket = await acceptTask.ConfigureAwait(false);
                 _ = HandleClientAsync(clientSocket);
             }
         }
@@ -51,33 +69,64 @@ namespace Chat.Server
 
             try
             {
-                int received = await clientSocket.ReceiveAsync(buffer, SocketFlags.None);
-                userName = Encoding.UTF8.GetString(buffer, 0, received);
+                int received = await clientSocket
+                    .ReceiveAsync(buffer, SocketFlags.None)
+                    .ConfigureAwait(false);
 
-                received = await clientSocket.ReceiveAsync(buffer, SocketFlags.None);
-                string enteredPassword = Encoding.UTF8.GetString(buffer, 0, received);
+                userName = Encoding
+                    .UTF8
+                    .GetString(buffer, 0, received);
+
+                received = await clientSocket
+                    .ReceiveAsync(buffer, SocketFlags.None)
+                    .ConfigureAwait(false);
+
+                string enteredPassword = Encoding
+                    .UTF8
+                    .GetString(buffer, 0, received);
 
                 if (!CheckAccess(enteredPassword))
                 {
-                    await clientSocket.SendAsync(Encoding.UTF8.GetBytes("Неверный пароль. Подключение закрыто."), SocketFlags.None);
-                    clientSocket.Close();
-                    return;
+                    await clientSocket
+                        .SendAsync(
+                            Encoding
+                            .UTF8
+                            .GetBytes("Неверный пароль. Подключение закрыто."), SocketFlags.None
+                        )
+                        .ConfigureAwait(false);
+
+                    clientSocket.Close(); 
+                    return; 
                 }
 
-                await clientSocket.SendAsync(Encoding.UTF8.GetBytes(_serverName), SocketFlags.None);
+                await clientSocket
+                    .SendAsync(
+                        Encoding
+                        .UTF8
+                        .GetBytes($"{_serverName}"), SocketFlags.None
+                    )
+                    .ConfigureAwait(false);
+                _connectedClients.TryAdd(clientSocket, userName);
 
-                await NotifyClientsAsync($"{userName} присоединился к чату.");
-                _connectedClients.Add(clientSocket);
+                await NotifyClientsAsync($"{userName} присоединился к чату.")
+                    .ConfigureAwait(false);
 
-                while (true)
+                while (_isRunning)
                 {
-                    received = await clientSocket.ReceiveAsync(buffer, SocketFlags.None);
+                    received = await clientSocket
+                        .ReceiveAsync(buffer, SocketFlags.None)
+                        .ConfigureAwait(false);
+
                     if (received == 0) break;
 
-                    string message = Encoding.UTF8.GetString(buffer, 0, received);
+                    string message = Encoding
+                        .UTF8
+                        .GetString(buffer, 0, received);
+
                     string formattedMessage = $"{userName}: {message}";
 
-                    await SendMessageToOthersAsync(clientSocket, formattedMessage);
+                    await SendMessageToOthersAsync(clientSocket, formattedMessage)
+                        .ConfigureAwait(false);
                 }
             }
             catch (SocketException ex)
@@ -86,30 +135,55 @@ namespace Chat.Server
             }
             finally
             {
+                _connectedClients.TryRemove(clientSocket, out _);
                 clientSocket.Close();
-                _connectedClients.Remove(clientSocket);
                 Console.WriteLine("Клиент отключен.");
-                await NotifyClientsAsync($"{userName} покинул чат.");
+                await NotifyClientsAsync($"{userName} покинул чат.")
+                    .ConfigureAwait(false);
             }
         }
 
         private async Task NotifyClientsAsync(string message)
         {
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            foreach (var client in _connectedClients)
+            byte[] messageBytes = Encoding
+                .UTF8
+                .GetBytes(message);
+
+            foreach (var client in _connectedClients.Keys)
             {
-                await client.SendAsync(messageBytes, SocketFlags.None);
+                try
+                {
+                    await client
+                        .SendAsync(messageBytes, SocketFlags.None)
+                        .ConfigureAwait(false);
+                }
+                catch (SocketException ex)
+                {
+                    Console.WriteLine($"Ошибка отправки сообщения клиенту: {ex.Message}");
+                }
             }
         }
 
         private async Task SendMessageToOthersAsync(Socket sender, string message)
         {
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            foreach (var otherClient in _connectedClients)
+            byte[] messageBytes = Encoding
+                .UTF8
+                .GetBytes(message);
+
+            foreach (var otherClient in _connectedClients.Keys)
             {
                 if (otherClient != sender)
                 {
-                    await otherClient.SendAsync(messageBytes, SocketFlags.None);
+                    try
+                    {
+                        await otherClient
+                            .SendAsync(messageBytes, SocketFlags.None)
+                            .ConfigureAwait(false);
+                    }
+                    catch (SocketException ex)
+                    {
+                        Console.WriteLine($"Ошибка отправки сообщения другому клиенту: {ex.Message}");
+                    }
                 }
             }
         }

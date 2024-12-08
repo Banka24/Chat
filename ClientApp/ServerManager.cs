@@ -12,13 +12,15 @@ namespace Chat.ClientApp
             if (_chatServer == null)
             {
                 _chatServer = new ChatServer();
-                await _chatServer.InsertServerSettingsAsync(serverName, serverPassword);
+                await _chatServer
+                    .InsertServerSettingsAsync(serverName, serverPassword)
+                    .ConfigureAwait(false);
             }
         }
 
         public static void StopServer()
         {
-            if(_chatServer != null)
+            if (_chatServer != null)
             {
                 _chatServer.Stop();
                 _chatServer = null!;

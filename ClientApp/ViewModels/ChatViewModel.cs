@@ -26,7 +26,7 @@ namespace ClientApp.ViewModels
         public string UserMessage
         {
             get => _userMessage;
-            set => SetProperty(ref _userMessage, value);
+            set => SetProperty(ref _userMessage, value.Trim());
         }
 
         public ChatViewModel(IChatClient chatClient)

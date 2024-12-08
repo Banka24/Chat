@@ -7,7 +7,8 @@
 			 x:DataType="vm:ServerStartViewModel"
              x:Class="ClientApp.Views.ServerStartView">
 	<Grid RowDefinitions="60, *, *">
-		<TextBlock Text="{Binding Message}"/>
+		<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Message}"/>
+		
 		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0, 150">
 			<TextBlock Text="Название"/>
 			<TextBox Text="{Binding ServerName}" Width="200"/>
