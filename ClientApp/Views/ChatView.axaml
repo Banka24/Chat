@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:ClientApp.ViewModels"
+			 xmlns:f="clr-namespace:System.Windows.Openm"
              mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="960"
              x:DataType="vm:ChatViewModel"
              x:Class="ClientApp.Views.ChatView">
@@ -14,8 +15,9 @@
 		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}"/>
 		<StackPanel Grid.Row="2" Orientation="Horizontal">
 			<TextBox Text="{Binding UserMessage, UpdateSourceTrigger=PropertyChanged}"
-                     Width="1690" AcceptsReturn="True"
+                     Width="1550" AcceptsReturn="True"
                      Watermark="Сообщение"/>
+			<Button Margin="10, 5, 5, 5" Content="Добавить файл" Name="AddButton"/>
 			<Button Margin="10, 5, 5, 5" Content="Отправить"
                     Command="{Binding SendMessageCommand}"/>
 		</StackPanel>

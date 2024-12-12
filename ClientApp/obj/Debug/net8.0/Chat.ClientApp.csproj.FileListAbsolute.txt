@@ -1,11 +1,3 @@
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.csproj.AssemblyReference.cache
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\resources
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.GeneratedMSBuildEditorConfig.editorconfig
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.AssemblyInfoInputs.cache
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.AssemblyInfo.cs
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.csproj.CoreCompileInputs.cache
-D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.sourcelink.json
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.exe
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.deps.json
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.runtimeconfig.json
@@ -75,6 +67,14 @@ D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.Services.pdb
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.Client.pdb
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.Server.pdb
 D:\learn\C#\Chat\ClientApp\bin\Debug\net8.0\Chat.ClientApp.ValidationRules.pdb
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.csproj.AssemblyReference.cache
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\resources
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.AssemblyInfoInputs.cache
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.AssemblyInfo.cs
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.csproj.CoreCompileInputs.cache
+D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Chat.ClientApp.sourcelink.json
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\Chat.ClientApp.dll
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\Avalonia\Chat.ClientApp.pdb
 D:\learn\C#\Chat\ClientApp\obj\Debug\net8.0\refint\Avalonia\Chat.ClientApp.dll

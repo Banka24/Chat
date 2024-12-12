@@ -2,19 +2,30 @@
 
 namespace ClientApp.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
-    {
-        private INotifyPropertyChanged _currentViewModel = null!;
-        public override INotifyPropertyChanged CurrentViewModel
-        {
-            get => _currentViewModel;
-            set => SetProperty(ref _currentViewModel, value, nameof(CurrentViewModel));
-        }
+   /// <summary>
+   /// Класс ViewModel для главного окна приложения.
+   /// </summary>
+   public class MainWindowViewModel : ViewModelBase
+   {
+       private INotifyPropertyChanged _currentViewModel = null!;
 
-        public MainWindowViewModel()
-        {
-            NavigationService.LoadStartViewModel(this);
-            NavigationService.NavigateTo(new StartViewModel());
-        }
-    }
+       /// <summary>
+       /// Свойство, которое содержит текущую ViewModel.
+       /// </summary>
+       public override INotifyPropertyChanged CurrentViewModel
+       {
+           get => _currentViewModel;
+           set => SetProperty(ref _currentViewModel, value, nameof(CurrentViewModel));
+       }
+
+       /// <summary>
+       /// Конструктор класса MainWindowViewModel.
+       /// </summary>
+       public MainWindowViewModel()
+       {
+           NavigationService.LoadStartViewModel(this);
+           NavigationService.NavigateTo(new StartViewModel());
+       }
+   }
+
 }

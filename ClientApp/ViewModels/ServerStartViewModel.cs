@@ -1,73 +1,98 @@
 ﻿using Chat.ClientApp;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
-using Tmds.DBus.Protocol;
 
 namespace ClientApp.ViewModels
 {
-    public class ServerStartViewModel : ViewModelBase
-    {
-        private string _message = string.Empty;
-        private string _serverName = string.Empty;
-        private string _serverPassword = string.Empty;
-        private bool _serverWork = false;
+   /// <summary>
+   /// Класс ViewModel для управления сервером.
+   /// </summary>
+   public class ServerStartViewModel : ViewModelBase
+   {
+       private string _message = string.Empty;
+       private string _serverName = string.Empty;
+       private string _serverPassword = string.Empty;
+       private bool _serverWork = false;
 
-        public IRelayCommand StartCommand { get; }
-        public IRelayCommand StopCommand { get; }
+       /// <summary>
+       /// Команда для запуска сервера.
+       /// </summary>
+       public IRelayCommand StartCommand { get; }
 
-        public string Message
-        {
-            get => _message;
-            set => SetProperty(ref _message, value);
-        }
+       /// <summary>
+       /// Команда для остановки сервера.
+       /// </summary>
+       public IRelayCommand StopCommand { get; }
 
-        public string ServerName
-        {
-            get => _serverName;
-            set => SetProperty(ref _serverName, value);
-        }
+       /// <summary>
+       /// Сообщение, отображаемое в интерфейсе.
+       /// </summary>
+       public string Message
+       {
+           get => _message;
+           set => SetProperty(ref _message, value);
+       }
 
-        public string ServerPassword
-        {
-            get => _serverPassword;
-            set => SetProperty(ref _serverPassword, value);
-        }
+       /// <summary>
+       /// Имя сервера.
+       /// </summary>
+       public string ServerName
+       {
+           get => _serverName;
+           set => SetProperty(ref _serverName, value);
+       }
 
-        public bool ServerWork
-        {
-            get => _serverWork;
-            set => SetProperty(ref _serverWork, value);
-        }
+       /// <summary>
+       /// Пароль сервера.
+       /// </summary>
+       public string ServerPassword
+       {
+           get => _serverPassword;
+           set => SetProperty(ref _serverPassword, value);
+       }
 
-        public ServerStartViewModel()
-        {
-            StartCommand = new RelayCommand(async () => await StartServerExecute());
-            StopCommand = new RelayCommand(async () => await StopServerExecute());
-        }
+       /// <summary>
+       /// Свойство, указывающее, работает ли сервер.
+       /// </summary>
+       public bool ServerWork
+       {
+           get => _serverWork;
+           set => SetProperty(ref _serverWork, value);
+       }
 
-        private async Task StartServerExecute()
-        {
-            ServerWork = true;
-            await ShowMessage("Сервер запущен.");
+       /// <summary>
+       /// Конструктор класса ServerStartViewModel.
+       /// Инициализирует команды для запуска и остановки сервера.
+       /// </summary>
+       public ServerStartViewModel()
+       {
+           StartCommand = new RelayCommand(async () => await StartServerExecute());
+           StopCommand = new RelayCommand(async () => await StopServerExecute());
+       }
 
-             await ServerManager
-                .StartServer(ServerName, ServerPassword)
-                .ConfigureAwait(false);
-        }
+       private async Task StartServerExecute()
+       {
+           ServerWork = true;
+           await ShowMessage("Сервер запущен.");
 
-        private async Task StopServerExecute()
-        {
-            Message = "Остановка сервера";
-            ServerManager.StopServer();
-            ServerWork = false;
-            await ShowMessage("Сервер остановлен.");
-        }
+           await ServerManager
+              .StartServer(ServerName, ServerPassword)
+              .ConfigureAwait(false);
+       }
 
-        private async Task ShowMessage(string message)
-        {
-            Message = message;
-            await Task.Delay(5000).ConfigureAwait(false);
-            Message = string.Empty;
-        }
-    }
+       private async Task StopServerExecute()
+       {
+           Message = "Остановка сервера";
+           ServerManager.StopServer();
+           ServerWork = false;
+           await ShowMessage("Сервер остановлен.");
+       }
+
+       private async Task ShowMessage(string message)
+       {
+           Message = message;
+           await Task.Delay(5000).ConfigureAwait(false);
+           Message = string.Empty;
+       }
+   }
 }

@@ -8,24 +8,46 @@ using System.Windows.Input;
 
 namespace ClientApp.ViewModels
 {
-    public abstract class ViewModelBase : ObservableObject, IViewModel
-    {
-        protected readonly INavigationService NavigationService;
-        public ICommand GoBackCommand { get; }
-        public virtual INotifyPropertyChanged CurrentViewModel { get; set; } = null!;
+   /// <summary>
+   /// Абстрактный класс ViewModelBase представляет базовую модель представления.
+   /// </summary>
+   public abstract class ViewModelBase : ObservableObject, IViewModel
+   {
+       /// <summary>
+       /// Сервис навигации.
+       /// </summary>
+       protected readonly INavigationService NavigationService;
 
-        protected ViewModelBase()
-        {
-            NavigationService = App
-                .ServiceProvider
-                .GetService<INavigationService>()!;
+       /// <summary>
+       /// Команда для возврата на предыдущий экран.
+       /// </summary>
+       public ICommand GoBackCommand { get; }
 
-            GoBackCommand = new RelayCommand(ExecuteBack);
-        }
+       /// <summary>
+       /// Текущая модель представления.
+       /// </summary>
+       public virtual INotifyPropertyChanged CurrentViewModel { get; set; } = null!;
 
-        protected virtual void ExecuteBack()
-        {
-            NavigationService.GoBack();
-        }
-    }
+       /// <summary>
+       /// Конструктор класса ViewModelBase.
+       /// Инициализирует сервис навигации и команду для возврата на предыдущий экран.
+       /// </summary>
+       protected ViewModelBase()
+       {
+           NavigationService = App
+               .ServiceProvider
+               .GetService<INavigationService>()!;
+
+           GoBackCommand = new RelayCommand(ExecuteBack);
+       }
+
+       /// <summary>
+       /// Метод для выполнения возврата на предыдущий экран.
+       /// Переходит на предыдущий экран.
+       /// </summary>
+       protected virtual void ExecuteBack()
+       {
+           NavigationService.GoBack();
+       }
+   }
 }

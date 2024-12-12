@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.ClientApp.Services", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Client", "Chat.Client\Chat.Client.csproj", "{B28E6127-3143-470B-AEFD-97D46E6DEC80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Server", "Chat.Server\Chat.Server.csproj", "{158C07DB-D4D3-4EDE-B01C-D5586B381ACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Server", "Chat.Server\Chat.Server.csproj", "{158C07DB-D4D3-4EDE-B01C-D5586B381ACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

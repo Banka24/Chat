@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chat.ClientApp.Models")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7c79a97bb50382d129c125a100262e25bfa47da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0c049c03f40b6a57a9a44f6fa9d105706113ff4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chat.ClientApp.Models")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chat.ClientApp.Models")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

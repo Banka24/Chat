@@ -5,6 +5,9 @@ using static System.Diagnostics.Debug;
 
 namespace Chat.Client
 {
+    /// <summary>
+    /// Класс ChatClient представляет клиента чата, который может подключаться к серверу, отправлять и получать сообщения.
+    /// </summary>
     public class ChatClient : IChatClient
     {
         private string _userName = string.Empty;
@@ -14,13 +17,27 @@ namespace Chat.Client
 
         public event Action<string> MessageReceived = null!;
 
+        /// <summary>
+        /// Получает имя сервера, к которому подключен клиент.
+        /// </summary>
+        /// <returns>Имя сервера</returns>
         public async Task<string> GetServerNameAsync(CancellationToken cancellationToken)
         {
             byte[] serverNameBuffer = new byte[1024];
             int serverNameLength = await _clientSocket.ReceiveAsync(serverNameBuffer, SocketFlags.None, cancellationToken);
-            return Encoding.UTF8.GetString(serverNameBuffer, 0, serverNameLength);
+            return Encoding
+                .UTF8
+                .GetString(serverNameBuffer, 0, serverNameLength);
         }
 
+        /// <summary>
+        /// Подключает клиента к серверу по указанному IP-адресу и паролю.
+        /// </summary>
+        /// <param name="ipAddress">IP-адрес сервера</param>
+        /// <param name="password">Пароль для подключения</param>
+        /// <param name="userName">Имя пользователя</param>
+        /// <param name="cancellationToken">Токен отмены</param>
+        /// <returns>True, если подключение успешно, иначе false</returns>
         public async Task<bool> ConnectAsync(string ipAddress, string password, string userName, CancellationToken cancellationToken)
         {
             _userName = userName;
@@ -30,15 +47,24 @@ namespace Chat.Client
                 await _clientSocket.ConnectAsync(new IPEndPoint(IPAddress.Parse(ipAddress), 8888), cancellationToken);
                 WriteLine("Подключено к серверу");
 
-                var nameBytes = Encoding.UTF8.GetBytes(_userName);
+                var nameBytes = Encoding
+                    .UTF8
+                    .GetBytes(_userName);
+
                 await SendAsync(nameBytes, cancellationToken);
 
-                var passwordBytes = Encoding.UTF8.GetBytes(password);
+                var passwordBytes = Encoding
+                    .UTF8
+                    .GetBytes(password);
+
                 await SendAsync(passwordBytes, cancellationToken);
 
                 byte[] responseBuffer = new byte[1024];
                 int responseLength = await _clientSocket.ReceiveAsync(responseBuffer, SocketFlags.None, cancellationToken);
-                string responseMessage = Encoding.UTF8.GetString(responseBuffer, 0, responseLength);
+
+                string responseMessage = Encoding
+                    .UTF8
+                    .GetString(responseBuffer, 0, responseLength);
 
                 if (responseMessage == "Неверный пароль. Подключение закрыто.")
                 {
@@ -64,6 +90,11 @@ namespace Chat.Client
             }
         }
 
+        /// <summary>
+        /// Отправляет данные на сервер.
+        /// </summary>
+        /// <param name="data">Данные для отправки</param>
+        /// <param name="cancellationToken">Токен отмены</param>
         public async Task SendAsync(byte[] data, CancellationToken cancellationToken)
         {
             try
@@ -87,7 +118,10 @@ namespace Chat.Client
                     int received = await _clientSocket.ReceiveAsync(buffer, SocketFlags.None, cancellationToken);
                     if (received == 0) break;
 
-                    string message = Encoding.UTF8.GetString(buffer, 0, received);
+                    string message = Encoding
+                        .UTF8
+                        .GetString(buffer, 0, received);
+
                     MessageReceived?.Invoke(message);
                 }
                 catch (SocketException ex)

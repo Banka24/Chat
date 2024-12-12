@@ -18,7 +18,8 @@
 		<StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
 			<Button Width="150" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Content="Подключиться" Command="{Binding ConnectionCommand}"/>
+					Content="Подключиться" IsEnabled="{Binding !IsConnecting}" 
+					Command="{Binding ConnectionCommand}"/>
 
 			<Button Width="150" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"

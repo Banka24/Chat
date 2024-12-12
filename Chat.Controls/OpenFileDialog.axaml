@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Chat.Controls.OpenFileDialog"
+        Title="OpenFileDialog">
+	<StackPanel>
+		<TextBox Name="FilePathTextBox" IsReadOnly="True" Margin="10" />
+		<Button Name="BrowseButton" Click="BrowseButton_Click" Content="Обзор..." Margin="10" />
+		<Button Name="OkButton" Click="OkButton_Click" Content="ОК" Margin="10" />
+		<Button Name="CancelButton" Click="CancelButton_Click" Content="Отмена" Margin="10" />
+	</StackPanel>
+</Window>
