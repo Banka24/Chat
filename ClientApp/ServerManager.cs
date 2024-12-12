@@ -11,14 +11,7 @@ namespace Chat.ClientApp
     public static class ServerManager
     {
         private static IChatServer _chatServer = null!;
-
-        static ServerManager()
-        {
-            _chatServer = App
-                .ServiceProvider
-                .GetRequiredService<IChatServer>();
-        }
-
+        
         /// <summary>
         /// Метод для запуска сервера.
         /// </summary>

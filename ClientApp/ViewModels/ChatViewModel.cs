@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace ClientApp.ViewModels
     {
         private string _serverName = string.Empty;
         private string _userMessage = string.Empty;
+        private bool _isReadOnly = false;
+        private ICollection<IStorageFile> _files = null!;
 
         /// <summary>
         /// Получает или задает клиента чата.
@@ -37,10 +40,16 @@ namespace ClientApp.ViewModels
             set => SetProperty(ref _serverName, value);
         }
 
+        public bool IsReadOnly
+        {
+            get => _isReadOnly;
+            set => SetProperty(ref _isReadOnly, value);
+        }
+
         /// <summary>
         /// Получает коллекцию сообщений.
         /// </summary>
-        public ObservableCollection<string> Messages { get; } = [];
+        public ObservableCollection<object> Messages { get; } = [];
 
         /// <summary>
         /// Получает или задает сообщение пользователя.
@@ -77,7 +86,19 @@ namespace ClientApp.ViewModels
         /// </summary>
         private async Task SendMessage()
         {
-            if (!string.IsNullOrWhiteSpace(UserMessage))
+            if (_files.Count > 0)
+            {
+                foreach (var file in _files)
+                {
+                    var fileBytes = await ReadFileAsBytes(file);
+                    await ChatClient.SendAsync(fileBytes, CancellationToken.None);
+                    Messages.Add(file);
+                }
+
+                UserMessage = string.Empty;
+                _files.Clear();
+            }
+            else if (!string.IsNullOrWhiteSpace(UserMessage))
             {
                 await ChatClient.SendAsync(Encoding.UTF8.GetBytes(UserMessage), CancellationToken.None);
 
@@ -86,16 +107,26 @@ namespace ClientApp.ViewModels
             }
         }
 
-        public async Task AddFile(IReadOnlyList<IStorageFile> files)
+        public void AddSelectedFiles(IReadOnlyList<IStorageFile> files)
         {
-            ICollection<byte> fileBytes;
+            _files = [.. files];
+            IsReadOnly = true;
 
-            foreach (var file in files)
+            PrintFileNames(
+                _files.Select(file => file.Name)
+            );
+        }
+
+        private void PrintFileNames(IEnumerable<string> fileNames)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var file in fileNames)
             {
-                // Получаем массив байтов из файла
-                fileBytes = await ReadFileAsBytes(file);
-                await ChatClient.SendAsync([..fileBytes], CancellationToken.None);
+                sb.AppendLine(file);
             }
+
+            UserMessage = sb.ToString();
         }
 
         private static async Task<byte[]> ReadFileAsBytes(IStorageFile file)

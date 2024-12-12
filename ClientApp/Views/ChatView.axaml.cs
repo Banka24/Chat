@@ -29,7 +29,7 @@ public partial class ChatView : UserControl
 
         if (files.Count > 0)
         {
-            await chatVm!.AddFile(files);
+            chatVm!.AddSelectedFiles(files);
         }
     }
 }
