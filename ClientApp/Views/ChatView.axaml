@@ -4,15 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:ClientApp.ViewModels"
 			 xmlns:f="clr-namespace:System.Windows.Openm"
+			 xmlns:local="clr-namespace:Chat.ClientApp.DTO;assembly=Chat.ClientApp"
              mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="960"
              x:DataType="vm:ChatViewModel"
              x:Class="ClientApp.Views.ChatView">
+	
 	<Grid RowDefinitions="60, *, 60">
 		<StackPanel Orientation="Horizontal">
 			<Button Content="Назад" Margin="10, 0" Command="{Binding GoBackCommand}"/>
 			<TextBlock Text="{Binding ServerName}" FontWeight="Bold" FontSize="16"/>
 		</StackPanel>
-		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}"/>
+
+		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<ContentControl>
+						<ContentControl.DataTemplates>
+							<DataTemplate DataType="{x:Type local:TextMessage}">
+								<TextBlock Text="{Binding Text}" />
+							</DataTemplate>
+							<DataTemplate DataType="{x:Type local:ImageMessage}">
+								<Image HorizontalAlignment="Left" Source="{Binding Image}" Width="{Binding Width}" Height="{Binding Height}" />
+							</DataTemplate>
+						</ContentControl.DataTemplates>
+						<ContentControl.Content>
+							<ContentPresenter Content="{Binding}" />
+						</ContentControl.Content>
+					</ContentControl>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
 		<StackPanel Grid.Row="2" Orientation="Horizontal">
 			<TextBox Text="{Binding UserMessage, UpdateSourceTrigger=PropertyChanged}"
                      Width="1550" AcceptsReturn="True"

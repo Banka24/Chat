@@ -28,7 +28,7 @@ D:\learn\C#\Chat\Chat.ClientApp.Models\obj\Debug\net8.0\ref\Chat.ClientApp.Model
 D:\learn\C#\Chat\Chat.ClientApp.Services\obj\Debug\net8.0\ref\Chat.ClientApp.Services.dll
 D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ref\Chat.ClientApp.ValidationRules.dll
 D:\learn\C#\Chat\Chat.Server\obj\Debug\net8.0\ref\Chat.Server.dll
-C:\Users\Banka\.nuget\packages\communitytoolkit.mvvm\8.3.2\lib\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\Banka\.nuget\packages\communitytoolkit.mvvm\8.4.0\lib\net8.0\CommunityToolkit.Mvvm.dll
 C:\Users\Banka\.nuget\packages\harfbuzzsharp\7.3.0.3\lib\net6.0\HarfBuzzSharp.dll
 C:\Users\Banka\.nuget\packages\microcom.runtime\0.11.0\lib\net5.0\MicroCom.Runtime.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\Microsoft.CSharp.dll

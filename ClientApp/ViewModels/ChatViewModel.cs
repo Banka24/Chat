@@ -1,5 +1,8 @@
-﻿using Avalonia.Platform.Storage;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using Chat.Client;
+using Chat.ClientApp.DTO;
+using Chat.ClientApp.Models;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,18 +84,25 @@ namespace ClientApp.ViewModels
             OnPropertyChanged(nameof(Messages));
         }
 
+        private Bitmap CreateImage(byte[] bytes)
+        {
+            using var ms = new MemoryStream(bytes);
+            return new Bitmap(ms);
+        }
+
         /// <summary>
         /// Отправляет сообщение через клиента чата.
         /// </summary>
         private async Task SendMessage()
         {
-            if (_files.Count > 0)
+            if (_files?.Count > 0)
             {
                 foreach (var file in _files)
                 {
                     var fileBytes = await ReadFileAsBytes(file);
                     await ChatClient.SendAsync(fileBytes, CancellationToken.None);
-                    Messages.Add(file);
+                    var image = CreateImage(fileBytes);
+                    Messages.Add(new ImageMessage(image, image.PixelSize.Width, image.PixelSize.Height));
                 }
 
                 UserMessage = string.Empty;
@@ -102,7 +112,7 @@ namespace ClientApp.ViewModels
             {
                 await ChatClient.SendAsync(Encoding.UTF8.GetBytes(UserMessage), CancellationToken.None);
 
-                Messages.Add($"Я: {UserMessage}");
+                Messages.Add(new TextMessage($"Я: {UserMessage}"));
                 UserMessage = string.Empty;
             }
         }

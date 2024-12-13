@@ -21,7 +21,7 @@ public partial class ChatView : UserControl
         var optionAllFiles = new FilePickerOpenOptions()
         {
             AllowMultiple = true,
-            FileTypeFilter = [FilePickerFileTypes.ImageAll, FilePickerFileTypes.All]
+            FileTypeFilter = [FilePickerFileTypes.ImageAll]
         };
 
         var files = await _storageProvider.OpenFilePickerAsync(optionAllFiles);

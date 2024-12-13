@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U0I9E7CnMMM=",
+  "dgSpecHash": "miV621CauDk=",
   "success": true,
   "projectFilePath": "D:\\learn\\C#\\Chat\\ClientApp\\Chat.ClientApp.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,7 @@
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia.win32\\11.2.2\\avalonia.win32.11.2.2.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia.x11\\11.2.2\\avalonia.x11.11.2.2.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Banka\\.nuget\\packages\\communitytoolkit.mvvm\\8.3.2\\communitytoolkit.mvvm.8.3.2.nupkg.sha512",
+    "C:\\Users\\Banka\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp\\7.3.0.3\\harfbuzzsharp.7.3.0.3.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\7.3.0.3\\harfbuzzsharp.nativeassets.linux.7.3.0.3.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\7.3.0.3\\harfbuzzsharp.nativeassets.macos.7.3.0.3.nupkg.sha512",

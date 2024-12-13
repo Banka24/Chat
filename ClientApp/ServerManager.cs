@@ -1,6 +1,4 @@
 ﻿using Chat.Server;
-using ClientApp;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace Chat.ClientApp
@@ -11,7 +9,7 @@ namespace Chat.ClientApp
     public static class ServerManager
     {
         private static IChatServer _chatServer = null!;
-        
+
         /// <summary>
         /// Метод для запуска сервера.
         /// </summary>
