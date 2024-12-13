@@ -78,7 +78,7 @@ namespace ClientApp.ViewModels
         /// Обрабатывает получение сообщения от клиента чата.
         /// </summary>
         /// <param name="message">Полученное сообщение.</param>
-        private void OnMessageReceived(string message)
+        private void OnMessageReceived(object message)
         {
             Messages.Add(message);
             OnPropertyChanged(nameof(Messages));
@@ -106,12 +106,13 @@ namespace ClientApp.ViewModels
                 }
 
                 UserMessage = string.Empty;
+                IsReadOnly = false;
                 _files.Clear();
             }
             else if (!string.IsNullOrWhiteSpace(UserMessage))
             {
-                await ChatClient.SendAsync(Encoding.UTF8.GetBytes(UserMessage), CancellationToken.None);
-
+                var textMessageBytes = Encoding.UTF8.GetBytes(UserMessage);
+                await ChatClient.SendAsync(textMessageBytes, CancellationToken.None);
                 Messages.Add(new TextMessage($"Я: {UserMessage}"));
                 UserMessage = string.Empty;
             }

@@ -72,12 +72,12 @@ namespace ClientApp.ViewModels
 
         private async Task StartServerExecute()
         {
+            ServerWork = true;
             await ShowMessage("Сервер запущен.");
 
             await ServerManager
                .StartServer(ServerName, ServerPassword)
                .ConfigureAwait(false);
-            ServerWork = true;
         }
 
         private async Task StopServerExecute()
