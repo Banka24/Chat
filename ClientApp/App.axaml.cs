@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform.Storage;
 using Chat.Client;
 using Chat.ClientApp.Models;
 using Chat.ClientApp.Services;
@@ -37,6 +36,7 @@ namespace ClientApp
             services.AddScoped<IServerService, ServerService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IChatClient, ChatClient>();
+            services.AddScoped<IMessageFormatter, MessageFormatter>();
             services.AddSingleton(
                 new User(string.Empty, string.Empty)
                 );

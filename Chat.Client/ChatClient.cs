@@ -105,11 +105,16 @@ namespace Chat.Client
             {
                 WriteLine($"Ошибка отправки данных: {ex.Message}");
             }
+            catch (OperationCanceledException)
+            {
+                WriteLine("Операция отправки была отменена.");
+            }
         }
+
 
         private async Task ReceiveMessagesAsync(CancellationToken cancellationToken)
         {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[100_000_000];
 
             while (true)
             {
@@ -118,15 +123,17 @@ namespace Chat.Client
                     int received = await _clientSocket.ReceiveAsync(buffer, SocketFlags.None, cancellationToken);
                     if (received == 0) break;
 
-                    string message = Encoding
-                        .UTF8
-                        .GetString(buffer, 0, received);
-
-                    MessageReceived?.Invoke(message);
+                    string data = Encoding.UTF8.GetString(buffer, 0, received);
+                    MessageReceived?.Invoke(data);
                 }
                 catch (SocketException ex)
                 {
                     WriteLine($"Ошибка получения данных: {ex.Message}");
+                    break;
+                }
+                catch (FormatException ex)
+                {
+                    WriteLine($"Ошибка формата данных: {ex.Message}");
                     break;
                 }
             }

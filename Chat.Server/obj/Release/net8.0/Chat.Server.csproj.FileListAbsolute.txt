@@ -10,3 +10,9 @@ D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\Chat.Server.dll
 D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\refint\Chat.Server.dll
 D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\Chat.Server.pdb
 D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\ref\Chat.Server.dll
+D:\learn\C#\Chat\Chat.Server\bin\Release\net8.0\Chat.ClientApp.Models.dll
+D:\learn\C#\Chat\Chat.Server\bin\Release\net8.0\Chat.ClientApp.Services.dll
+D:\learn\C#\Chat\Chat.Server\bin\Release\net8.0\Chat.ClientApp.Services.pdb
+D:\learn\C#\Chat\Chat.Server\bin\Release\net8.0\Chat.ClientApp.Models.pdb
+D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\Chat.Server.csproj.AssemblyReference.cache
+D:\learn\C#\Chat\Chat.Server\obj\Release\net8.0\Chat.Ser.DC654D9A.Up2Date

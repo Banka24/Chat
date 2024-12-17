@@ -221,7 +221,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\learn\\C#\\Chat\\Chat.ClientApp.Services\\Chat.ClientApp.Services.csproj": {
+                "projectPath": "D:\\learn\\C#\\Chat\\Chat.ClientApp.Services\\Chat.ClientApp.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
