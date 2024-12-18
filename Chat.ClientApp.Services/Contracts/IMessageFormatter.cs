@@ -4,7 +4,7 @@ namespace Chat.ClientApp.Services.Contracts
 {
     public interface IMessageFormatter
     {
-        string SerializeMessage(string userName, string type, string inputMessage);
-        SocketMessage DeserializeMessage(string jsonMessage);
+        string SerializeMessage<T>(string userName, string type, T inputMessage);
+        SocketMessage<T> DeserializeMessage<T>(string jsonMessage);
     }
 }

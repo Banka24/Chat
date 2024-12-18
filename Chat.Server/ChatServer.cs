@@ -77,7 +77,7 @@ namespace Chat.Server
 
         private async Task HandleClientAsync(Socket clientSocket)
         {
-            byte[] buffer = new byte[100_000_000];
+            byte[] buffer = new byte[27_000_000];
             string userName = string.Empty;
 
             try
@@ -158,7 +158,7 @@ namespace Chat.Server
         private async Task NotifyClientsAsync(string message)
         {
 
-            string jsonMessage = _messageFormatter.SerializeMessage("Server", "text", message);
+            string jsonMessage = _messageFormatter.SerializeMessage("Server", "str", message);
 
             byte[] messageBytes = Encoding
                 .UTF8

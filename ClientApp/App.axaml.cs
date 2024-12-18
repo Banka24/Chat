@@ -37,6 +37,7 @@ namespace ClientApp
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IChatClient, ChatClient>();
             services.AddScoped<IMessageFormatter, MessageFormatter>();
+            services.AddScoped<IZipService, ZipService>();
             services.AddSingleton(
                 new User(string.Empty, string.Empty)
                 );

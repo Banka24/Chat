@@ -21,6 +21,9 @@ public class ValidLoginAttribute : ValidationAttribute
         if (string.IsNullOrWhiteSpace(login))
             return new ValidationResult("Логин должен быть заполнен");
 
+            if (login.Length > 25)
+                return new ValidationResult("Максимальная длина логина 25 символов");
+
         return ValidationResult.Success!;
     }
 }

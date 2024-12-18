@@ -111,10 +111,9 @@ namespace Chat.Client
             }
         }
 
-
         private async Task ReceiveMessagesAsync(CancellationToken cancellationToken)
         {
-            byte[] buffer = new byte[100_000_000];
+            byte[] buffer = new byte[27_000_000];
 
             while (true)
             {
