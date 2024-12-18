@@ -22,12 +22,16 @@ namespace ClientApp.ViewModels
     /// </summary>
     public class ChatViewModel : ViewModelBase
     {
+        private const string MessageTypeString = "str";
+        private const string MessageTypeImage = "img";
+
         private string _serverName = string.Empty;
         private string _userMessage = string.Empty;
         private bool _isReadOnly = false;
         private ICollection<IStorageFile> _files = null!;
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;
+        private readonly IZipService _zipService;
 
         /// <summary>
         /// Получает команду для отправки сообщения.
@@ -69,7 +73,14 @@ namespace ClientApp.ViewModels
         /// <param name="chatClient">Клиент чата.</param>
         public ChatViewModel(IChatClient chatClient)
         {
-            _messageFormatter = App.ServiceProvider.GetRequiredService<IMessageFormatter>();
+            _messageFormatter = App
+                .ServiceProvider
+                .GetRequiredService<IMessageFormatter>();
+
+            _zipService = App
+                .ServiceProvider
+                .GetRequiredService<IZipService>();
+
             SendMessageCommand = new RelayCommand(async () => await SendMessage());
             _chatClient = chatClient;
             _chatClient.MessageReceived += OnMessageReceived;
@@ -81,21 +92,22 @@ namespace ClientApp.ViewModels
         /// <param name="message">Полученное сообщение.</param>
         private void OnMessageReceived(string message)
         {
-            var data = _messageFormatter.DeserializeMessage(message);
+            var data = _messageFormatter.DeserializeMessage<object>(message);
 
             switch (data.Type)
             {
-                case "image":
-                    var byteArray = Convert.FromBase64String(data.Message);
-                    var image = CreateImage(byteArray);
-                    var imageMessage = new ImageMessage(image, image.PixelSize.Width, image.PixelSize.Height);
-                    Messages.Add(data.UserName);
-                    Messages.Add(imageMessage);
+                case MessageTypeImage:
+
+                    byte[] message64 = Convert.FromBase64String(data.Message.ToString()!);
+                    byte[] decomposeImage = _zipService.DecompressFile(message64);
+
+                    Messages.Add(data.Name);
+                    ShowImage(decomposeImage);
                     break;
 
-                case "text":
-                    var textMessage = new TextMessage(data.Message);
-                    Messages.Add($"{data.UserName}: {textMessage.Text}");
+                case MessageTypeString:
+                    var textMessage = new TextMessage(data.Message.ToString()!);
+                    Messages.Add($"{data.Name}: {textMessage.Text}");
                     break;
 
                 default:
@@ -129,23 +141,27 @@ namespace ClientApp.ViewModels
 
         private async Task SendFilesAsync(string userName)
         {
-            foreach (var file in _files)
+            foreach (IStorageFile file in _files)
             {
                 try
                 {
-                    var fileBytes = await ReadFileAsBytes(file);
-                    string base64File = Convert.ToBase64String(fileBytes);
+                    byte[] fileBytes = await ReadFileAsBytes(file);
+                    byte[] compresFile = _zipService.CompressFile(fileBytes);
+                    
+                    // Формируем текстовое сообщение с указанием типа
+                    string messageToSend = _messageFormatter.SerializeMessage(userName, MessageTypeImage, compresFile);
 
-                    string messageToSend = _messageFormatter.SerializeMessage(userName, "image", base64File);
-                    var messageBytes = Encoding.UTF8.GetBytes(messageToSend);
+                    var messageBytes = Encoding
+                        .UTF8
+                        .GetBytes(messageToSend);
+
                     await _chatClient.SendAsync(messageBytes, CancellationToken.None);
 
-                    var image = CreateImage(fileBytes);
-                    Messages.Add(new ImageMessage(image, image.PixelSize.Width, image.PixelSize.Height));
+                    ShowImage(fileBytes);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error sending file {file.Name}: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Error sending file {file.Name}: {ex.Message}");
                 }
             }
 
@@ -157,8 +173,12 @@ namespace ClientApp.ViewModels
         private async Task SendTextMessageAsync(string userName, string message)
         {
             // Формируем текстовое сообщение с указанием типа
-            string messageToSend = _messageFormatter.SerializeMessage(userName, "text", message);
-            var textMessageBytes = Encoding.UTF8.GetBytes(messageToSend);
+            string messageToSend = _messageFormatter.SerializeMessage(userName, MessageTypeString, message);
+
+            var textMessageBytes = Encoding
+                .UTF8
+                .GetBytes(messageToSend);
+
             await _chatClient.SendAsync(textMessageBytes, CancellationToken.None);
 
             Messages.Add(new TextMessage($"Я: {message}"));
@@ -179,7 +199,7 @@ namespace ClientApp.ViewModels
         {
             var sb = new StringBuilder();
 
-            foreach (var file in fileNames)
+            foreach (string file in fileNames)
             {
                 sb.AppendLine(file);
             }
@@ -191,8 +211,17 @@ namespace ClientApp.ViewModels
         {
             using var stream = await file.OpenReadAsync();
             using var memoryStream = new MemoryStream();
+
             await stream.CopyToAsync(memoryStream);
+
             return memoryStream.ToArray();
+        }
+
+        private void ShowImage(byte[] imageByteArray)
+        {
+            var image = CreateImage(imageByteArray);
+            var imageMessage = new ImageMessage(image, image.PixelSize.Width, image.PixelSize.Height);
+            Messages.Add(imageMessage);
         }
     }
 }

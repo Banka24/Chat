@@ -6,19 +6,19 @@ namespace Chat.ClientApp.Services
 {
     public class MessageFormatter : IMessageFormatter
     {
-        public string SerializeMessage(string userName, string type, string inputMessage)
+        public string SerializeMessage<T>(string userName, string type, T inputMessage)
         {
-            var message = new SocketMessage(userName, type, inputMessage);
+            var message = new SocketMessage<T>(userName, type, inputMessage);
             return JsonConvert.SerializeObject(message);
         }
 
-        public SocketMessage DeserializeMessage(string jsonMessage)
+        public SocketMessage<T> DeserializeMessage<T>(string jsonMessage)
         {
-            var message = new SocketMessage(string.Empty, string.Empty, string.Empty);
+            var message = new SocketMessage<T>();
 
             try
             {
-                message = JsonConvert.DeserializeObject<SocketMessage>(jsonMessage)!;
+                message = JsonConvert.DeserializeObject<SocketMessage<T>>(jsonMessage)!;
             }
             catch(Exception ex)
             {

@@ -8,7 +8,21 @@ namespace Chat.ClientApp
     /// </summary>
     public static class ServerManager
     {
+        private static string _serverName;
+        private static string _serverPassword;
+        private static bool _isWork;
+
         private static IChatServer _chatServer = null!;
+        public static string ServerName => _serverName;
+        public static string ServerPassword => _serverPassword;
+        public static bool IsWork => _isWork;
+
+        static ServerManager()
+        {
+            _serverName = string.Empty;
+            _serverPassword = string.Empty;
+            _isWork = false;
+        }
 
         /// <summary>
         /// Метод для запуска сервера.
@@ -19,6 +33,8 @@ namespace Chat.ClientApp
         {
             if (_chatServer == null)
             {
+                ChangeOptions(serverName, serverPassword, true);
+
                 _chatServer = new ChatServer();
                 await _chatServer
                     .InsertServerSettingsAsync(serverName, serverPassword)
@@ -35,7 +51,16 @@ namespace Chat.ClientApp
             {
                 _chatServer.Stop();
                 _chatServer = null!;
+
+                ChangeOptions(string.Empty, string.Empty, false);
             }
+        }
+
+        private static void ChangeOptions(string name, string password, bool work)
+        {
+            _serverName = name;
+            _serverPassword = password;
+            _isWork = work;
         }
     }
 }

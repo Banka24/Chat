@@ -10,9 +10,9 @@ namespace ClientApp.ViewModels
     public class ServerStartViewModel : ViewModelBase
     {
         private string _message = string.Empty;
-        private string _serverName = string.Empty;
-        private string _serverPassword = string.Empty;
-        private bool _serverWork = false;
+        private string _serverName;
+        private string _serverPassword;
+        private bool _serverWork;
 
         /// <summary>
         /// Команда для запуска сервера.
@@ -68,6 +68,9 @@ namespace ClientApp.ViewModels
         {
             StartCommand = new RelayCommand(async () => await StartServerExecute());
             StopCommand = new RelayCommand(async () => await StopServerExecute());
+            _serverName = ServerManager.ServerName;
+            _serverPassword = ServerManager.ServerPassword;
+            _serverWork = ServerManager.IsWork;
         }
 
         private async Task StartServerExecute()
