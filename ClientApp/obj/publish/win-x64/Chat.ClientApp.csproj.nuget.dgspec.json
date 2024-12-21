@@ -69,10 +69,6 @@
               "version": "[8.0.11, 8.0.11]"
             },
             {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
@@ -172,10 +168,6 @@
               "version": "[8.0.11, 8.0.11]"
             },
             {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
@@ -263,10 +255,6 @@
               "version": "[8.0.11, 8.0.11]"
             },
             {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
@@ -312,7 +300,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\learn\\C#\\Chat\\Chat.ClientApp.Services\\Chat.ClientApp.Services.csproj": {
+                "projectPath": "D:\\learn\\C#\\Chat\\Chat.ClientApp.Services\\Chat.ClientApp.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -351,10 +343,6 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
             {
@@ -455,7 +443,7 @@
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
-              "version": "[8.3.2, )"
+              "version": "[8.4.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -482,10 +470,6 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
             {
@@ -573,10 +557,6 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[8.0.11, 8.0.11]"
             },
             {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XlGJLT0t9pI=",
+  "dgSpecHash": "luH6gK7F/00=",
   "success": true,
   "projectFilePath": "D:\\learn\\C#\\Chat\\ClientApp\\Chat.ClientApp.csproj",
   "expectedPackageFiles": [
@@ -17,7 +17,7 @@
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia.win32\\11.2.2\\avalonia.win32.11.2.2.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\avalonia.x11\\11.2.2\\avalonia.x11.11.2.2.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Banka\\.nuget\\packages\\communitytoolkit.mvvm\\8.3.2\\communitytoolkit.mvvm.8.3.2.nupkg.sha512",
+    "C:\\Users\\Banka\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp\\7.3.0.3\\harfbuzzsharp.7.3.0.3.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\7.3.0.3\\harfbuzzsharp.nativeassets.linux.7.3.0.3.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\7.3.0.3\\harfbuzzsharp.nativeassets.macos.7.3.0.3.nupkg.sha512",
@@ -37,8 +37,7 @@
     "C:\\Users\\Banka\\.nuget\\packages\\tmds.dbus.protocol\\0.20.0\\tmds.dbus.protocol.0.20.0.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.11\\microsoft.netcore.app.runtime.win-x64.8.0.11.nupkg.sha512",
     "C:\\Users\\Banka\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.11\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Banka\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.11\\microsoft.aspnetcore.app.runtime.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Banka\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.11\\microsoft.netcore.app.crossgen2.win-x64.8.0.11.nupkg.sha512"
+    "C:\\Users\\Banka\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.11\\microsoft.aspnetcore.app.runtime.win-x64.8.0.11.nupkg.sha512"
   ],
   "logs": []
 }

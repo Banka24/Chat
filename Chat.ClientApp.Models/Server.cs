@@ -1,9 +1,9 @@
 ﻿namespace Chat.ClientApp.Models
 {
-   /// <summary>
-   /// Класс для работы с сервером чата.
-   /// </summary>
-   public class Server(string name, string ipAdress)
+    /// <summary>
+    /// Класс для работы с сервером чата.
+    /// </summary>
+    public class Server(string name, string ipAdress)
     {
         /// <summary>
         /// Имя сервера.

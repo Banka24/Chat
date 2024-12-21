@@ -147,7 +147,7 @@ namespace ClientApp.ViewModels
                 {
                     byte[] fileBytes = await ReadFileAsBytes(file);
                     byte[] compresFile = _zipService.CompressFile(fileBytes);
-                    
+
                     // Формируем текстовое сообщение с указанием типа
                     string messageToSend = _messageFormatter.SerializeMessage(userName, MessageTypeImage, compresFile);
 

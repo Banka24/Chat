@@ -18,7 +18,7 @@
           "Chat.ClientApp.Services": "1.0.0",
           "Chat.ClientApp.ValidationRules": "1.0.0",
           "Chat.Server": "1.0.0",
-          "CommunityToolkit.Mvvm": "8.3.2",
+          "CommunityToolkit.Mvvm": "8.4.0",
           "Microsoft.Extensions.DependencyInjection": "9.0.0",
           "Microsoft.NET.ILLink.Tasks": "8.0.11",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "8.0.11"
@@ -365,11 +365,11 @@
           }
         }
       },
-      "CommunityToolkit.Mvvm/8.3.2": {
+      "CommunityToolkit.Mvvm/8.4.0": {
         "runtime": {
           "lib/net8.0/CommunityToolkit.Mvvm.dll": {
-            "assemblyVersion": "8.3.0.0",
-            "fileVersion": "8.3.2.1"
+            "assemblyVersion": "8.4.0.0",
+            "fileVersion": "8.4.0.1"
           }
         }
       },
@@ -505,6 +505,9 @@
         }
       },
       "Chat.Server/1.0.0": {
+        "dependencies": {
+          "Chat.ClientApp.Services": "1.0.0"
+        },
         "runtime": {
           "Chat.Server.dll": {
             "assemblyVersion": "1.0.0",
@@ -616,12 +619,12 @@
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
-    "CommunityToolkit.Mvvm/8.3.2": {
+    "CommunityToolkit.Mvvm/8.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-m8EolE1A0Updj68WTsZSGI6VWb6mUqHPh7QFo0kt7+JPhYMNXRS1ch8TS/oITAdcxTLrwMOp3ku1KjeG1/Zdpg==",
-      "path": "communitytoolkit.mvvm/8.3.2",
-      "hashPath": "communitytoolkit.mvvm.8.3.2.nupkg.sha512"
+      "sha512": "sha512-tqVU8yc/ADO9oiTRyTnwhFN68hCwvkliMierptWOudIAvWY1mWCh5VFh+guwHJmpMwfg0J0rY+yyd5Oy7ty9Uw==",
+      "path": "communitytoolkit.mvvm/8.4.0",
+      "hashPath": "communitytoolkit.mvvm.8.4.0.nupkg.sha512"
     },
     "HarfBuzzSharp/7.3.0.3": {
       "type": "package",

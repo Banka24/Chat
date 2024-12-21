@@ -23,7 +23,7 @@ namespace ClientApp
         /// Свойство ServiceProvider предоставляет доступ к сервисам приложения.
         /// </summary>
         public static IServiceProvider ServiceProvider { get; private set; } = null!;
-        private Window _window = null!; 
+        private Window _window = null!;
 
         /// <summary>
         /// Метод Initialize инициализирует сервисы приложения.
