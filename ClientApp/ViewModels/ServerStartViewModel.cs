@@ -13,6 +13,7 @@ namespace ClientApp.ViewModels
         private string _serverName;
         private string _serverPassword;
         private bool _serverWork;
+        private bool _goBackEnabled = true;
 
         /// <summary>
         /// Команда для запуска сервера.
@@ -60,6 +61,12 @@ namespace ClientApp.ViewModels
             set => SetProperty(ref _serverWork, value);
         }
 
+        public bool GoBackEnabled
+        {
+            get => _goBackEnabled;
+            set => SetProperty(ref _goBackEnabled, value);
+        }
+
         /// <summary>
         /// Конструктор класса ServerStartViewModel.
         /// Инициализирует команды для запуска и остановки сервера.
@@ -75,8 +82,10 @@ namespace ClientApp.ViewModels
 
         private async Task StartServerExecute()
         {
+            GoBackEnabled = false;
             ServerWork = true;
-            await ShowMessage("Сервер запущен.");
+            await ShowMessage("Сервер запускается");
+            GoBackEnabled = true;
 
             await ServerManager
                .StartServer(ServerName, ServerPassword)

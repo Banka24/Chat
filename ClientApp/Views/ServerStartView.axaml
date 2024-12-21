@@ -11,9 +11,10 @@
 		
 		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0, 150">
 			<TextBlock Text="Название"/>
-			<TextBox Text="{Binding ServerName}" Width="200"/>
+			<TextBox Text="{Binding ServerName}" IsReadOnly="{Binding ServerWork}" Width="200"/>
 			<TextBlock Text="Пароль"/>
-			<TextBox PasswordChar="*" Text="{Binding ServerPassword}" Width="200"/>
+			<TextBox PasswordChar="*" IsReadOnly="{Binding ServerWork}"
+					 Text="{Binding ServerPassword}" Width="200"/>
 		</StackPanel>
 		
 		<StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
@@ -27,7 +28,7 @@
 
 			<Button Width="170" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Content="Назад" Command="{Binding GoBackCommand}"/>
+					Content="Назад" Command="{Binding GoBackCommand}" IsEnabled="{Binding GoBackEnabled}"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

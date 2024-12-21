@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Platform.Storage;
 using ClientApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,25 @@ public partial class ChatView : UserControl
         if (files.Count > 0)
         {
             chatVm!.AddSelectedFiles(files);
+        }
+    }
+
+    private void TextBox_KeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.KeyModifiers == KeyModifiers.Shift && e.Key == Key.Enter)
+        {
+            InputMessageBox.Text += "\n";
+            InputMessageBox.CaretIndex = InputMessageBox.Text!.Length;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Enter)
+        {
+            var viewModel = (ChatViewModel)DataContext!;
+            if (viewModel.SendMessageCommand.CanExecute(null))
+            {
+                viewModel.SendMessageCommand.Execute(null);
+            }
+            e.Handled = true;
         }
     }
 }

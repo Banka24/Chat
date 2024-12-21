@@ -24,7 +24,8 @@
 								<TextBlock Text="{Binding Text}" />
 							</DataTemplate>
 							<DataTemplate DataType="{x:Type local:ImageMessage}">
-								<Image HorizontalAlignment="Left" Source="{Binding Image}" Width="{Binding Width}" Height="{Binding Height}" />
+								<Image HorizontalAlignment="Left" Source="{Binding Image}"
+									   Width="{Binding Width}" Height="{Binding Height}" />
 							</DataTemplate>
 						</ContentControl.DataTemplates>
 						<ContentControl.Content>
@@ -36,9 +37,8 @@
 		</ListBox>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal">
-			<TextBox Text="{Binding UserMessage, UpdateSourceTrigger=PropertyChanged}"
-                     Width="1550" AcceptsReturn="True"
-                     Watermark="Сообщение" IsReadOnly="{Binding IsReadOnly}"/>
+			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" Watermark="Ваше сообщение. Для переноса строки используйте Shift + Enter"
+					 IsReadOnly="{Binding IsReadOnly}" KeyDown="TextBox_KeyDown"/>
 			<Button Margin="10, 5, 5, 5" Content="Добавить файл" Name="AddButton"/>
 			<Button Margin="10, 5, 5, 5" Content="Отправить"
                     Command="{Binding SendMessageCommand}"/>

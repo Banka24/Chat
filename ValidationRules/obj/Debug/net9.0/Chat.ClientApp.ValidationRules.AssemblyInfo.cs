@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chat.ClientApp.ValidationRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8453b0061b12e99f415da1a0bd76a999bbc3352f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a851d7a6fc1295d0d2565d436e8afe229de560f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chat.ClientApp.ValidationRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chat.ClientApp.ValidationRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
