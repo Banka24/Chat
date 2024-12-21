@@ -20,7 +20,7 @@ namespace Chat.ClientApp.Services
             {
                 message = JsonConvert.DeserializeObject<SocketMessage<T>>(jsonMessage)!;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }

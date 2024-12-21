@@ -1,9 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿using Chat.ClientApp.Services;
+using Chat.ClientApp.Services.Contracts;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Chat.ClientApp.Services.Contracts;
-using Chat.ClientApp.Services;
 
 namespace Chat.Server
 {

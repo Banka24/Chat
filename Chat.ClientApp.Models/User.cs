@@ -1,9 +1,9 @@
 ﻿namespace Chat.ClientApp.Models
 {
-   /// <summary>
-   /// Класс для работы с пользователем чата.
-   /// </summary>
-   public class User(string login, string password)
+    /// <summary>
+    /// Класс для работы с пользователем чата.
+    /// </summary>
+    public class User(string login, string password)
     {
         /// <summary>
         /// Логин пользователя.
