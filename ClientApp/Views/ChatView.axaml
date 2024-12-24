@@ -37,8 +37,9 @@
 		</ListBox>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal">
-			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" Watermark="Ваше сообщение. Для переноса строки используйте Shift + Enter"
+			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" Watermark="Для отправки сообщения Enter. Для переноса строки используйте Shift + Enter"
 					 IsReadOnly="{Binding IsReadOnly}" KeyDown="TextBox_KeyDown"/>
+			<Button Margin="5, 0, 0, 0" Content="{Binding Content}" Command="{Binding SendAudioCommand}"/>
 			<Button Margin="10, 5, 5, 5" Content="Добавить файл" Name="AddButton"/>
 			<Button Margin="10, 5, 5, 5" Content="Отправить"
                     Command="{Binding SendMessageCommand}"/>
