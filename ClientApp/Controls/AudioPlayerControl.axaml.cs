@@ -87,6 +87,7 @@ namespace Chat.ClientApp.Controls
         {
             if (_waveOut != null)
             {
+                VolumeValueText.Text = ((int)e.NewValue * 100).ToString();
                 _waveOut.Volume = (float)e.NewValue;
             }
         }

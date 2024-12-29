@@ -111,7 +111,7 @@ public partial class ChatView : UserControl
     {
         if (sender is AudioPlayerControl audioPlayerControl)
         {
-            var audioMessage = (AudioMessage)((ContentPresenter)audioPlayerControl.Parent).Content!;
+            var audioMessage = (AudioMessage)((ContentPresenter)audioPlayerControl.Parent!).Content!;
             audioPlayerControl.LoadAudio(audioMessage.UserName, audioMessage.Audio.ToArray());
         }
     }
