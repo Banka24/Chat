@@ -30,6 +30,9 @@ build_property.EnableCodeStyleSeverity =
 [D:/learn/C\#/Chat/ClientApp/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/learn/C\#/Chat/ClientApp/Controls/AudioPlayerControl.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/learn/C\#/Chat/ClientApp/Views/ChatView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

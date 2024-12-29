@@ -6,6 +6,7 @@ using Chat.ClientApp.Models;
 using Chat.ClientApp.Services.Contracts;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,6 +25,7 @@ namespace ClientApp.ViewModels
     {
         private const string MessageTypeString = "str";
         private const string MessageTypeImage = "img";
+        private const string MessageTypeAudio = "aud";
 
         private string _serverName = string.Empty;
         private string _userMessage = string.Empty;
@@ -32,6 +34,7 @@ namespace ClientApp.ViewModels
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;
         private readonly IZipService _zipService;
+        private readonly string _userName;
 
         /// <summary>
         /// Получает команду для отправки сообщения.
@@ -81,7 +84,12 @@ namespace ClientApp.ViewModels
                 .ServiceProvider
                 .GetRequiredService<IZipService>();
 
-            SendMessageCommand = new RelayCommand(async () => await SendMessage());
+            _userName = App
+                .ServiceProvider
+                .GetRequiredService<User>()
+                .Login;
+
+            SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
             _chatClient = chatClient;
             _chatClient.MessageReceived += OnMessageReceived;
         }
@@ -110,6 +118,12 @@ namespace ClientApp.ViewModels
                     Messages.Add($"{data.Name}: {textMessage.Text}");
                     break;
 
+                case MessageTypeAudio:
+                    byte[] audioBytes = ((JArray)data.Message).Select(b => (byte)(int)b).ToArray();
+                    var audioMessage = new AudioMessage(data.Name, audioBytes);
+                    Messages.Add(audioMessage);
+                    break;
+
                 default:
                     System.Diagnostics.Debug.WriteLine("Другой тип");
                     break;
@@ -122,34 +136,29 @@ namespace ClientApp.ViewModels
             return new Bitmap(ms);
         }
 
-        private async Task SendMessage()
+        private async Task SendMessageAsync()
         {
-            string userName = App
-                .ServiceProvider
-                .GetRequiredService<User>()
-                .Login;
-
             if (_files?.Count > 0)
             {
-                await SendFilesAsync(userName);
+                await SendFilesAsync();
             }
             else if (!string.IsNullOrWhiteSpace(UserMessage))
             {
-                await SendTextMessageAsync(userName, UserMessage);
+                await SendTextMessageAsync(UserMessage);
             }
         }
 
-        private async Task SendFilesAsync(string userName)
+        private async Task SendFilesAsync()
         {
             foreach (IStorageFile file in _files)
             {
                 try
                 {
-                    byte[] fileBytes = await ReadFileAsBytes(file);
+                    byte[] fileBytes = await ReadFileAsBytesAsync(file);
                     byte[] compresFile = _zipService.CompressFile(fileBytes);
 
                     // Формируем текстовое сообщение с указанием типа
-                    string messageToSend = _messageFormatter.SerializeMessage(userName, MessageTypeImage, compresFile);
+                    string messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeImage, compresFile);
 
                     var messageBytes = Encoding
                         .UTF8
@@ -170,10 +179,10 @@ namespace ClientApp.ViewModels
             _files.Clear();
         }
 
-        private async Task SendTextMessageAsync(string userName, string message)
+        private async Task SendTextMessageAsync(string message)
         {
             // Формируем текстовое сообщение с указанием типа
-            string messageToSend = _messageFormatter.SerializeMessage(userName, MessageTypeString, message);
+            string messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeString, message);
 
             var textMessageBytes = Encoding
                 .UTF8
@@ -207,7 +216,7 @@ namespace ClientApp.ViewModels
             UserMessage = sb.ToString();
         }
 
-        private static async Task<byte[]> ReadFileAsBytes(IStorageFile file)
+        private static async Task<byte[]> ReadFileAsBytesAsync(IStorageFile file)
         {
             using var stream = await file.OpenReadAsync();
             using var memoryStream = new MemoryStream();
@@ -222,6 +231,18 @@ namespace ClientApp.ViewModels
             var image = CreateImage(imageByteArray);
             var imageMessage = new ImageMessage(image, image.PixelSize.Width, image.PixelSize.Height);
             Messages.Add(imageMessage);
+        }
+
+        public async Task SendAudioAsync(ICollection<byte> buffer)
+        {
+            var messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeAudio, buffer);
+
+            var messageBytes = Encoding
+                       .UTF8
+                       .GetBytes(messageToSend);
+
+            await _chatClient.SendAsync(messageBytes, CancellationToken.None);
+            Messages.Add(new AudioMessage("Я:", buffer));
         }
     }
 }

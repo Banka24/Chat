@@ -131,7 +131,10 @@ namespace Chat.Server
                         .ReceiveAsync(buffer, SocketFlags.None)
                         .ConfigureAwait(false);
 
-                    if (received == 0) break;
+                    if (received == 0)
+                    {
+                        await Task.Delay(20000);
+                    }
 
                     string message = Encoding
                         .UTF8

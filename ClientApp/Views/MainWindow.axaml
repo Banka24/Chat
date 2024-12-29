@@ -7,15 +7,14 @@
         x:Class="ClientApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ClientApp" WindowStartupLocation="CenterScreen"
-		MaxHeight="1440" MaxWidth="2560" MinHeight="720" MinWidth="1280"
-		Width="1800" Height="960">
+        Title="ClientApp" MaxHeight="1440" MaxWidth="2560"
+		MinHeight="720" MinWidth="1280">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
-    <ContentControl Grid.Row="1" 
-					Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"/>
-	
+	<ContentControl Grid.Row="1"
+                    Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"/>
+
 </Window>

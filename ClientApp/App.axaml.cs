@@ -34,10 +34,10 @@ namespace ClientApp
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IServerService, ServerService>();
-            services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IChatClient, ChatClient>();
             services.AddScoped<IMessageFormatter, MessageFormatter>();
             services.AddScoped<IZipService, ZipService>();
+            services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton(
                 new User(string.Empty, string.Empty)
                 );

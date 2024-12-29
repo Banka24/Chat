@@ -5,6 +5,7 @@
              xmlns:vm="using:ClientApp.ViewModels"
 			 xmlns:f="clr-namespace:System.Windows.Openm"
 			 xmlns:local="clr-namespace:Chat.ClientApp.DTO;assembly=Chat.ClientApp"
+			 xmlns:controls="clr-namespace:Chat.ClientApp.Controls;assembly=Chat.ClientApp"
              mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="960"
              x:DataType="vm:ChatViewModel"
              x:Class="ClientApp.Views.ChatView">
@@ -27,6 +28,9 @@
 								<Image HorizontalAlignment="Left" Source="{Binding Image}"
 									   Width="{Binding Width}" Height="{Binding Height}" />
 							</DataTemplate>
+							<DataTemplate DataType="{x:Type local:AudioMessage}">
+								<controls:AudioPlayerControl x:Name="audioPlayerControl" Loaded="AudioPlayerControl_Loaded"/>
+							</DataTemplate>
 						</ContentControl.DataTemplates>
 						<ContentControl.Content>
 							<ContentPresenter Content="{Binding}" />
@@ -37,8 +41,10 @@
 		</ListBox>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal">
-			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" Watermark="Ваше сообщение. Для переноса строки используйте Shift + Enter"
+			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" 
+					 Watermark="Для отправки сообщения Enter. Для переноса строки используйте Shift + Enter"
 					 IsReadOnly="{Binding IsReadOnly}" KeyDown="TextBox_KeyDown"/>
+			<Button Margin="10, 5, 5, 5" Name="AudioButton" Click="AudioClick"/>
 			<Button Margin="10, 5, 5, 5" Content="Добавить файл" Name="AddButton"/>
 			<Button Margin="10, 5, 5, 5" Content="Отправить"
                     Command="{Binding SendMessageCommand}"/>
