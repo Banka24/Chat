@@ -76,3 +76,10 @@ D:\learn\C#\Chat\ClientApp\obj\Release\net9.0-windows\refint\Avalonia\Chat.Clien
 D:\learn\C#\Chat\ClientApp\obj\Release\net9.0-windows\Chat.Cli.C2613370.Up2Date
 D:\learn\C#\Chat\ClientApp\obj\Release\net9.0-windows\Chat.ClientApp.genruntimeconfig.cache
 D:\learn\C#\Chat\ClientApp\obj\Release\net9.0-windows\ref\Chat.ClientApp.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.Asio.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.Core.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.Midi.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.Wasapi.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.WinForms.dll
+D:\learn\C#\Chat\ClientApp\bin\Release\net9.0-windows\NAudio.WinMM.dll

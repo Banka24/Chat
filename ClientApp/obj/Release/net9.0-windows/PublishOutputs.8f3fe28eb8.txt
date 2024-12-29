@@ -29,6 +29,13 @@ C:\Users\Banka\Desktop\App\HarfBuzzSharp.dll
 C:\Users\Banka\Desktop\App\MicroCom.Runtime.dll
 C:\Users\Banka\Desktop\App\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Banka\Desktop\App\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Banka\Desktop\App\NAudio.dll
+C:\Users\Banka\Desktop\App\NAudio.Asio.dll
+C:\Users\Banka\Desktop\App\NAudio.Core.dll
+C:\Users\Banka\Desktop\App\NAudio.Midi.dll
+C:\Users\Banka\Desktop\App\NAudio.Wasapi.dll
+C:\Users\Banka\Desktop\App\NAudio.WinForms.dll
+C:\Users\Banka\Desktop\App\NAudio.WinMM.dll
 C:\Users\Banka\Desktop\App\Newtonsoft.Json.dll
 C:\Users\Banka\Desktop\App\SkiaSharp.dll
 C:\Users\Banka\Desktop\App\Tmds.DBus.Protocol.dll

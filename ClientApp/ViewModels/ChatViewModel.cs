@@ -6,6 +6,7 @@ using Chat.ClientApp.Models;
 using Chat.ClientApp.Services.Contracts;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -118,8 +119,8 @@ namespace ClientApp.ViewModels
                     break;
 
                 case MessageTypeAudio:
-                    byte[] audio64 = Convert.FromBase64String(data.Message.ToString()!);
-                    var audioMessage = new AudioMessage(data.Name, audio64);
+                    byte[] audioBytes = ((JArray)data.Message).Select(b => (byte)(int)b).ToArray();
+                    var audioMessage = new AudioMessage(data.Name, audioBytes);
                     Messages.Add(audioMessage);
                     break;
 
