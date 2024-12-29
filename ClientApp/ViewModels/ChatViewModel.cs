@@ -6,7 +6,6 @@ using Chat.ClientApp.Models;
 using Chat.ClientApp.Services.Contracts;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,13 +24,11 @@ namespace ClientApp.ViewModels
     {
         private const string MessageTypeString = "str";
         private const string MessageTypeImage = "img";
+        private const string MessageTypeAudio = "aud";
 
-        private string _content = "|>";
         private string _serverName = string.Empty;
         private string _userMessage = string.Empty;
         private bool _isReadOnly = false;
-        private bool _isRecord = false;
-        private List<byte> _buffer = [];
         private ICollection<IStorageFile> _files = null!;
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;
@@ -42,7 +39,6 @@ namespace ClientApp.ViewModels
         /// Получает команду для отправки сообщения.
         /// </summary>
         public IRelayCommand SendMessageCommand { get; }
-        public IRelayCommand SendAudioCommand { get; }
 
         /// <summary>
         /// Получает или задает имя сервера.
@@ -57,12 +53,6 @@ namespace ClientApp.ViewModels
         {
             get => _isReadOnly;
             set => SetProperty(ref _isReadOnly, value);
-        }
-
-        public string Content
-        {
-            get => _content;
-            set => SetProperty(ref _content, value);
         }
 
         /// <summary>
@@ -99,7 +89,6 @@ namespace ClientApp.ViewModels
                 .Login;
 
             SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
-            SendAudioCommand = new RelayCommand(async () => await AudioExecute());
             _chatClient = chatClient;
             _chatClient.MessageReceived += OnMessageReceived;
         }
@@ -126,6 +115,12 @@ namespace ClientApp.ViewModels
                 case MessageTypeString:
                     var textMessage = new TextMessage(data.Message.ToString()!);
                     Messages.Add($"{data.Name}: {textMessage.Text}");
+                    break;
+
+                case MessageTypeAudio:
+                    byte[] audio64 = Convert.FromBase64String(data.Message.ToString()!);
+                    var audioMessage = new AudioMessage(data.Name, audio64);
+                    Messages.Add(audioMessage);
                     break;
 
                 default:
@@ -237,48 +232,16 @@ namespace ClientApp.ViewModels
             Messages.Add(imageMessage);
         }
 
-        private async Task AudioExecute()
+        public async Task SendAudioAsync(ICollection<byte> buffer)
         {
-            using var input = new WaveIn()
-            {
-                WaveFormat = new WaveFormat(44100, 24, 2)
-            };
-
-            input.DataAvailable += (sender, e) =>
-            {
-                _buffer.AddRange(e.Buffer.Take(e.BytesRecorded));
-            };
-
-            if (!_isRecord)
-            {
-                Content = "||";
-                input.StartRecording();
-                _isRecord = true;
-            }
-            else
-            {
-                Content = "|>";
-                input.StopRecording();
-
-                if (_buffer.Count > 0)
-                {
-                    await SendAudioAsync();
-                }
-
-                _buffer.Clear();
-                _isRecord = false;
-            }
-        }
-
-        private async Task SendAudioAsync()
-        {
-            var messageToSend = _messageFormatter.SerializeMessage(_userName, "aud", _buffer);
+            var messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeAudio, buffer);
 
             var messageBytes = Encoding
                        .UTF8
                        .GetBytes(messageToSend);
 
             await _chatClient.SendAsync(messageBytes, CancellationToken.None);
+            Messages.Add(new AudioMessage("Я:", buffer));
         }
     }
 }
