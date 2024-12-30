@@ -15,7 +15,7 @@ namespace ClientApp.ViewModels
         /// <summary>
         /// Команда для выполнения регистрации.
         /// </summary>
-        public IRelayCommand RegistartionCommand { get; }
+        public IRelayCommand RegistrationCommand { get; }
 
         /// <summary>
         /// Конструктор класса StartViewModel.
@@ -24,7 +24,7 @@ namespace ClientApp.ViewModels
         public StartViewModel()
         {
             LoginCommand = new RelayCommand(ExecuteLogin);
-            RegistartionCommand = new RelayCommand(ExecuteRegistration);
+            RegistrationCommand = new RelayCommand(ExecuteRegistration);
         }
 
         /// <summary>

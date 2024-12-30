@@ -8,16 +8,38 @@ using System.Text;
 namespace Chat.Server
 {
     /// <summary>
-    /// Класс для работы с сервером чата.
+    /// Класс ChatServer представляет собой сервер для чата.
     /// </summary>
     public class ChatServer : IChatServer
     {
+        /// <summary>
+        /// Словарь, содержащий подключенных клиентов и их имена.
+        /// </summary>
         private readonly ConcurrentDictionary<Socket, string> _connectedClients = new();
+
+        /// <summary>
+        /// Имя сервера.
+        /// </summary>
         private string _serverName = string.Empty;
+
+        /// <summary>
+        /// Пароль сервера.
+        /// </summary>
         private string _serverPassword = string.Empty;
+
+        /// <summary>
+        /// Флаг, указывающий, запущен ли сервер.
+        /// </summary>
         private bool _isRunning = false;
+
+        /// <summary>
+        /// Форматтер сообщений.
+        /// </summary>
         private readonly IMessageFormatter _messageFormatter = new MessageFormatter();
 
+        /// <summary>
+        /// Свойство, указывающее, запущен ли сервер.
+        /// </summary>
         public bool IsRunning => _isRunning;
 
         /// <summary>
@@ -51,6 +73,9 @@ namespace Chat.Server
             _isRunning = false;
         }
 
+        /// <summary>
+        /// Метод StartWorkAsync запускает работу сервера.
+        /// </summary>
         private async Task StartWorkAsync()
         {
             using var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -75,6 +100,10 @@ namespace Chat.Server
             }
         }
 
+        /// <summary>
+        /// Метод HandleClientAsync обрабатывает подключенного клиента.
+        /// </summary>
+        /// <param name="clientSocket">сокет клиента</param>
         private async Task HandleClientAsync(Socket clientSocket)
         {
             byte[] buffer = new byte[27_000_000];
@@ -119,6 +148,7 @@ namespace Chat.Server
                         .GetBytes($"{_serverName}"), SocketFlags.None
                     )
                     .ConfigureAwait(false);
+
                 _connectedClients.TryAdd(clientSocket, userName);
 
 
@@ -131,10 +161,7 @@ namespace Chat.Server
                         .ReceiveAsync(buffer, SocketFlags.None)
                         .ConfigureAwait(false);
 
-                    if (received == 0)
-                    {
-                        await Task.Delay(20000);
-                    }
+                    if (received == 0) break;
 
                     string message = Encoding
                         .UTF8
@@ -151,13 +178,19 @@ namespace Chat.Server
             finally
             {
                 _connectedClients.TryRemove(clientSocket, out _);
+
                 clientSocket.Close();
                 Console.WriteLine("Клиент отключен.");
+
                 await NotifyClientsAsync($"{userName} покинул чат.")
                     .ConfigureAwait(false);
             }
         }
 
+        /// <summary>
+        /// Метод NotifyClientsAsync уведомляет всех клиентов о событии.
+        /// </summary>
+        /// <param name="message">сообщение для уведомления</param>
         private async Task NotifyClientsAsync(string message)
         {
 
@@ -182,6 +215,11 @@ namespace Chat.Server
             }
         }
 
+        /// <summary>
+        /// Метод SendMessageToOthersAsync отправляет сообщение всем клиентам, кроме отправителя.
+        /// </summary>
+        /// <param name="sender">сокет отправителя</param>
+        /// <param name="message">сообщение для отправки</param>
         private async Task SendMessageToOthersAsync(Socket sender, string message)
         {
             byte[] messageBytes = Encoding
@@ -206,6 +244,11 @@ namespace Chat.Server
             }
         }
 
+        /// <summary>
+        /// Метод CheckAccess проверяет доступ клиента по паролю.
+        /// </summary>
+        /// <param name="password">пароль клиента</param>
+        /// <returns>true, если пароль верный, иначе false</returns>
         private bool CheckAccess(string password)
         {
             return password == _serverPassword;

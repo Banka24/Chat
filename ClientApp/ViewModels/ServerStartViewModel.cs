@@ -103,7 +103,11 @@ namespace ClientApp.ViewModels
         private async Task ShowMessage(string message)
         {
             Message = message;
-            await Task.Delay(5000).ConfigureAwait(false);
+
+            await Task
+                .Delay(5000)
+                .ConfigureAwait(false);
+
             Message = string.Empty;
         }
     }

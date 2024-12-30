@@ -41,6 +41,10 @@ namespace ClientApp.ViewModels
         /// Получает команду для отправки сообщения.
         /// </summary>
         public IRelayCommand SendMessageCommand { get; }
+
+        /// <summary>
+        /// Получает команду для добавления сервера в избранное.
+        /// </summary>
         public IRelayCommand AddFavoriteServerCommand { get; }
 
         /// <summary>
@@ -52,6 +56,9 @@ namespace ClientApp.ViewModels
             set => SetProperty(ref _serverName, value);
         }
 
+        /// <summary>
+        /// Получает или задает флаг, указывающий, доступен ли только для чтения.
+        /// </summary>
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -201,6 +208,10 @@ namespace ClientApp.ViewModels
             UserMessage = string.Empty;
         }
 
+        /// <summary>
+        /// Добавляет выбранные файлы в коллекцию файлов.
+        /// </summary>
+        /// <param name="files">Выбранные файлы.</param>
         public void AddSelectedFiles(IReadOnlyList<IStorageFile> files)
         {
             _files = [.. files];
@@ -240,6 +251,10 @@ namespace ClientApp.ViewModels
             Messages.Add(imageMessage);
         }
 
+        /// <summary>
+        /// Отправляет аудио сообщение.
+        /// </summary>
+        /// <param name="buffer">Буфер аудио сообщения.</param>
         public async Task SendAudioAsync(ICollection<byte> buffer)
         {
             var messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeAudio, buffer);

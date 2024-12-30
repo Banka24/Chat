@@ -9,23 +9,50 @@ namespace Chat.ClientApp.Services
     /// </summary>
     public class ServerService : IServerService
     {
-        private readonly string _path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Servers.json");
+        /// <summary>
+        /// Путь к файлу, где хранятся данные о серверах.
+        /// </summary>
+        private readonly string _path = Path
+            .Combine(
+                AppDomain
+                .CurrentDomain
+                .BaseDirectory, "Servers.json"
+            );
+
+        /// <summary>
+        /// Коллекция серверов.
+        /// </summary>
         private ICollection<Server> _servers = [];
 
+        /// <summary>
+        /// Добавляет новый сервер.
+        /// </summary>
+        /// <param name="name">Имя сервера.</param>
+        /// <param name="ipAddress">IP-адрес сервера.</param>
+        /// <returns>True, если сервер успешно добавлен, иначе false.</returns>
         public async Task<bool> AddServerAsync(string name, string ipAddress)
         {
             await ReadServersAsync();
+
             var newServer = new Server(name, ipAddress);
             _servers.Add(newServer);
+
             return await WriteServersAsync(_servers);
         }
 
+        /// <summary>
+        /// Загружает список серверов.
+        /// </summary>
+        /// <returns>Коллекция серверов.</returns>
         public async Task<ICollection<Server>> LoadServers()
         {
             await ReadServersAsync();
             return _servers;
         }
 
+        /// <summary>
+        /// Читает данные о серверах из файла.
+        /// </summary>
         private async Task ReadServersAsync()
         {
             if (!File.Exists(_path))
@@ -46,6 +73,11 @@ namespace Chat.ClientApp.Services
             }
         }
 
+        /// <summary>
+        /// Записывает данные о серверах в файл.
+        /// </summary>
+        /// <param name="servers">Коллекция серверов.</param>
+        /// <returns>True, если данные успешно записаны, иначе false.</returns>
         private async Task<bool> WriteServersAsync(ICollection<Server> servers)
         {
             string json = JsonConvert.SerializeObject(servers, Formatting.Indented);
@@ -63,5 +95,4 @@ namespace Chat.ClientApp.Services
             return true;
         }
     }
-
 }
