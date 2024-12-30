@@ -33,6 +33,13 @@ D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\HarfBuzzSharp.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\MicroCom.Runtime.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\Microsoft.Extensions.DependencyInjection.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Asio.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Core.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Midi.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Wasapi.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.WinForms.dll
+D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.WinMM.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\SkiaSharp.dll
 D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\Tmds.DBus.Protocol.dll
@@ -80,10 +87,3 @@ D:\learn\C#\Chat\ClientApp\obj\Debug\net9.0-windows\refint\Avalonia\Chat.ClientA
 D:\learn\C#\Chat\ClientApp\obj\Debug\net9.0-windows\Chat.Cli.C2613370.Up2Date
 D:\learn\C#\Chat\ClientApp\obj\Debug\net9.0-windows\Chat.ClientApp.genruntimeconfig.cache
 D:\learn\C#\Chat\ClientApp\obj\Debug\net9.0-windows\ref\Chat.ClientApp.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Asio.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Core.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Midi.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.Wasapi.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.WinForms.dll
-D:\learn\C#\Chat\ClientApp\bin\Debug\net9.0-windows\NAudio.WinMM.dll

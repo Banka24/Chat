@@ -4,7 +4,7 @@ using static BCrypt.Net.BCrypt;
 namespace Chat.ClientApp.Services
 {
     /// <summary>
-    /// Класс для работы с безопасностью пользователей.
+    /// Класс SecurityService реализует интерфейс ISecurityService и предоставляет методы для для работы с безопасностью пользователей.
     /// </summary>
     public class SecurityService : ISecurityService
     {

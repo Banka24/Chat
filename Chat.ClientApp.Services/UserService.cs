@@ -9,10 +9,12 @@ namespace Chat.ClientApp.Services
     /// </summary>
     public class UserService : IUserService
     {
-        private readonly string _path = AppDomain
-            .CurrentDomain
-            .BaseDirectory
-            .ToString() + "UserData.json";
+        private readonly string _path = Path
+            .Combine(
+                AppDomain
+                .CurrentDomain
+                .BaseDirectory, "UserData.json"
+            );
 
         /// <summary>
         /// Метод GetUserInfoAsync асинхронно получает информацию о пользователе по логину.

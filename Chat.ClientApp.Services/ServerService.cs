@@ -10,37 +10,89 @@ namespace Chat.ClientApp.Services
     public class ServerService : IServerService
     {
         /// <summary>
-        /// Метод LoadServers асинхронно загружает коллекцию серверов из JSON-файла.
+        /// Путь к файлу, где хранятся данные о серверах.
         /// </summary>
-        /// <returns>Возвращает коллекцию серверов или null, если файл не существует или произошла ошибка при чтении или десериализации.</returns>
+        private readonly string _path = Path
+            .Combine(
+                AppDomain
+                .CurrentDomain
+                .BaseDirectory, "Servers.json"
+            );
+
+        /// <summary>
+        /// Коллекция серверов.
+        /// </summary>
+        private ICollection<Server> _servers = [];
+
+        /// <summary>
+        /// Добавляет новый сервер.
+        /// </summary>
+        /// <param name="name">Имя сервера.</param>
+        /// <param name="ipAddress">IP-адрес сервера.</param>
+        /// <returns>True, если сервер успешно добавлен, иначе false.</returns>
+        public async Task<bool> AddServerAsync(string name, string ipAddress)
+        {
+            await ReadServersAsync();
+
+            var newServer = new Server(name, ipAddress);
+            _servers.Add(newServer);
+
+            return await WriteServersAsync(_servers);
+        }
+
+        /// <summary>
+        /// Загружает список серверов.
+        /// </summary>
+        /// <returns>Коллекция серверов.</returns>
         public async Task<ICollection<Server>> LoadServers()
         {
-            string path = AppDomain
-                .CurrentDomain
-                .BaseDirectory
-                .ToString() + "Servers.json";
+            await ReadServersAsync();
+            return _servers;
+        }
 
-            if (File.Exists(path))
+        /// <summary>
+        /// Читает данные о серверах из файла.
+        /// </summary>
+        private async Task ReadServersAsync()
+        {
+            if (!File.Exists(_path))
             {
-                try
-                {
-                    string jsonContent = await File.ReadAllTextAsync(path);
-                    var serversCollection = JsonConvert.DeserializeObject<ICollection<Server>>(jsonContent);
-                    return serversCollection ?? null!;
-                }
-                catch (IOException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Ошибка чтения файла: {ex.Message}");
-                    return null!;
-                }
-                catch (JsonException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Ошибка десериализации: {ex.Message}");
-                    return null!;
-                }
+                _servers = [];
+                return;
             }
 
-            return null!;
+            try
+            {
+                string json = await File.ReadAllTextAsync(_path);
+                _servers = JsonConvert.DeserializeObject<ICollection<Server>>(json) ?? [];
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                _servers = [];
+            }
+        }
+
+        /// <summary>
+        /// Записывает данные о серверах в файл.
+        /// </summary>
+        /// <param name="servers">Коллекция серверов.</param>
+        /// <returns>True, если данные успешно записаны, иначе false.</returns>
+        private async Task<bool> WriteServersAsync(ICollection<Server> servers)
+        {
+            string json = JsonConvert.SerializeObject(servers, Formatting.Indented);
+
+            try
+            {
+                await File.WriteAllTextAsync(_path, json);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+
+            return true;
         }
     }
 }

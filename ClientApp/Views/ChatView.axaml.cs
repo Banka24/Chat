@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -9,27 +9,56 @@ using ClientApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using NAudio.Wave;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ClientApp.Views;
 
+/// <summary>
+/// Представляет элемент управления для отображения чата.
+/// </summary>
 public partial class ChatView : UserControl
 {
+    /// <summary>
+    /// Провайдер хранилища.
+    /// </summary>
     private readonly IStorageProvider _storageProvider;
-    private WaveIn _input = null!;
+
+    /// <summary>
+    /// Входной поток аудио.
+    /// </summary>
+
+    private IWaveIn _input = null!;
+
+    /// <summary>
+    /// Буфер для записи аудио.
+    /// </summary>
     private readonly List<byte> _buffer = [];
+
+    /// <summary>
+    /// Флаг, указывающий, происходит ли запись аудио.
+    /// </summary>
     private bool _isRecord = false;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="ChatView"/>.
+    /// </summary>
     public ChatView()
     {
-        _storageProvider = App.ServiceProvider.GetRequiredService<IStorageProvider>();
+        _storageProvider = App
+            .ServiceProvider
+            .GetRequiredService<IStorageProvider>();
+
         InitializeComponent();
-        AudioButton.Content = "|>";
+        AudioButton.Content = "▶";
         AddButton.Click += AddFile_Click;
     }
 
+    /// <summary>
+    /// Обрабатывает событие нажатия кнопки добавления файла.
+    /// </summary>
+    /// <param name="sender">Объект, вызвавший событие.</param>
+    /// <param name="e">Аргументы события.</param>
     private async void AddFile_Click(object? sender, RoutedEventArgs e)
     {
         var optionAllFiles = new FilePickerOpenOptions()
@@ -47,6 +76,11 @@ public partial class ChatView : UserControl
         }
     }
 
+    /// <summary>
+    /// Обрабатывает событие нажатия клавиши в текстовом поле.
+    /// </summary>
+    /// <param name="sender">Объект, вызвавший событие.</param>
+    /// <param name="e">Аргументы события.</param>
     private void TextBox_KeyDown(object? sender, KeyEventArgs e)
     {
         if (e.KeyModifiers == KeyModifiers.Shift && e.Key == Key.Enter)
@@ -60,12 +94,19 @@ public partial class ChatView : UserControl
             var viewModel = (ChatViewModel)DataContext!;
             if (viewModel.SendMessageCommand.CanExecute(null))
             {
-                viewModel.SendMessageCommand.Execute(null);
+                viewModel
+                    .SendMessageCommand
+                    .Execute(null);
             }
             e.Handled = true;
         }
     }
 
+    /// <summary>
+    /// Обрабатывает событие нажатия кнопки аудио.
+    /// </summary>
+    /// <param name="sender">Объект, вызвавший событие.</param>
+    /// <param name="e">Аргументы события.</param>
     private void AudioClick(object? sender, RoutedEventArgs e)
     {
         if (!_isRecord)
@@ -78,9 +119,12 @@ public partial class ChatView : UserControl
         }
     }
 
+    /// <summary>
+    /// Начинает запись аудио.
+    /// </summary>
     private void StartRecordAudio()
     {
-        AudioButton.Content = "||";
+        AudioButton.Content = "■";
         _buffer.Clear();
         _isRecord = true;
 
@@ -97,9 +141,12 @@ public partial class ChatView : UserControl
         _input.StartRecording();
     }
 
+    /// <summary>
+    /// Останавливает запись аудио и отправляет записанный файл.
+    /// </summary>
     private async Task StopRecordAudio()
     {
-        AudioButton.Content = "|>";
+        AudioButton.Content = "▶";
         _input.StopRecording();
         _input.Dispose();
         var vm = (ChatViewModel)DataContext!;
@@ -107,12 +154,17 @@ public partial class ChatView : UserControl
         _isRecord = false;
     }
 
+    /// <summary>
+    /// Обрабатывает событие загрузки элемента управления воспроизведения аудио.
+    /// </summary>
+    /// <param name="sender">Объект, вызвавший событие.</param>
+    /// <param name="e">Аргументы события.</param>
     private void AudioPlayerControl_Loaded(object sender, RoutedEventArgs e)
     {
         if (sender is AudioPlayerControl audioPlayerControl)
         {
             var audioMessage = (AudioMessage)((ContentPresenter)audioPlayerControl.Parent!).Content!;
-            audioPlayerControl.LoadAudio(audioMessage.UserName, audioMessage.Audio.ToArray());
+            audioPlayerControl.LoadAudio(audioMessage.UserName, [.. audioMessage.Audio]);
         }
     }
 }

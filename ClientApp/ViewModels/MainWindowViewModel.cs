@@ -27,5 +27,4 @@ namespace ClientApp.ViewModels
             NavigationService.NavigateTo(new StartViewModel());
         }
     }
-
 }

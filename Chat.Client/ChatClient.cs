@@ -13,8 +13,21 @@ namespace Chat.Client
         private string _userName = string.Empty;
         private Socket _clientSocket = null!;
         private string _connectedServerName = string.Empty;
+        private string _serverIpAddress = string.Empty;
+
+        /// <summary>
+        /// Получает имя сервера, к которому подключен клиент.
+        /// </summary>
         public string ServerName => _connectedServerName;
 
+        /// <summary>
+        /// Получает IP-адрес сервера, к которому подключен клиент.
+        /// </summary>
+        public string IpAddress => _serverIpAddress;
+
+        /// <summary>
+        /// Событие, возникающее при получении сообщения от сервера.
+        /// </summary>
         public event Action<string> MessageReceived = null!;
 
         /// <summary>
@@ -25,6 +38,7 @@ namespace Chat.Client
         {
             byte[] serverNameBuffer = new byte[1024];
             int serverNameLength = await _clientSocket.ReceiveAsync(serverNameBuffer, SocketFlags.None, cancellationToken);
+
             return Encoding
                 .UTF8
                 .GetString(serverNameBuffer, 0, serverNameLength);
@@ -44,7 +58,9 @@ namespace Chat.Client
             _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
-                await _clientSocket.ConnectAsync(new IPEndPoint(IPAddress.Parse(ipAddress), 8888), cancellationToken);
+                var newIpAddress = IPAddress.Parse(ipAddress);
+                _serverIpAddress = newIpAddress.ToString();
+                await _clientSocket.ConnectAsync(new IPEndPoint(newIpAddress, 8888), cancellationToken);
                 WriteLine("Подключено к серверу");
 
                 var nameBytes = Encoding
@@ -122,7 +138,10 @@ namespace Chat.Client
                     int received = await _clientSocket.ReceiveAsync(buffer, SocketFlags.None, cancellationToken);
                     if (received == 0) break;
 
-                    string data = Encoding.UTF8.GetString(buffer, 0, received);
+                    string data = Encoding
+                        .UTF8
+                        .GetString(buffer, 0, received);
+
                     MessageReceived?.Invoke(data);
                 }
                 catch (SocketException ex)

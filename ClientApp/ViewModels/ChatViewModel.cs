@@ -34,12 +34,18 @@ namespace ClientApp.ViewModels
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;
         private readonly IZipService _zipService;
+        private readonly IServerService _serverService;
         private readonly string _userName;
 
         /// <summary>
         /// Получает команду для отправки сообщения.
         /// </summary>
         public IRelayCommand SendMessageCommand { get; }
+
+        /// <summary>
+        /// Получает команду для добавления сервера в избранное.
+        /// </summary>
+        public IRelayCommand AddFavoriteServerCommand { get; }
 
         /// <summary>
         /// Получает или задает имя сервера.
@@ -50,6 +56,9 @@ namespace ClientApp.ViewModels
             set => SetProperty(ref _serverName, value);
         }
 
+        /// <summary>
+        /// Получает или задает флаг, указывающий, доступен ли только для чтения.
+        /// </summary>
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -89,7 +98,12 @@ namespace ClientApp.ViewModels
                 .GetRequiredService<User>()
                 .Login;
 
+            _serverService = App
+                .ServiceProvider
+                .GetRequiredService<IServerService>();
+
             SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
+            AddFavoriteServerCommand = new RelayCommand(async () => await AddFavoriteServerAsync());
             _chatClient = chatClient;
             _chatClient.MessageReceived += OnMessageReceived;
         }
@@ -194,6 +208,10 @@ namespace ClientApp.ViewModels
             UserMessage = string.Empty;
         }
 
+        /// <summary>
+        /// Добавляет выбранные файлы в коллекцию файлов.
+        /// </summary>
+        /// <param name="files">Выбранные файлы.</param>
         public void AddSelectedFiles(IReadOnlyList<IStorageFile> files)
         {
             _files = [.. files];
@@ -233,6 +251,10 @@ namespace ClientApp.ViewModels
             Messages.Add(imageMessage);
         }
 
+        /// <summary>
+        /// Отправляет аудио сообщение.
+        /// </summary>
+        /// <param name="buffer">Буфер аудио сообщения.</param>
         public async Task SendAudioAsync(ICollection<byte> buffer)
         {
             var messageToSend = _messageFormatter.SerializeMessage(_userName, MessageTypeAudio, buffer);
@@ -243,6 +265,11 @@ namespace ClientApp.ViewModels
 
             await _chatClient.SendAsync(messageBytes, CancellationToken.None);
             Messages.Add(new AudioMessage("Я:", buffer));
+        }
+
+        private async Task AddFavoriteServerAsync()
+        {
+            await _serverService.AddServerAsync(_chatClient.ServerName, _chatClient.IpAddress);
         }
     }
 }

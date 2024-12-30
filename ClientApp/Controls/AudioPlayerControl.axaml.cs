@@ -5,13 +5,34 @@ using System.IO;
 
 namespace Chat.ClientApp.Controls
 {
+    /// <summary>
+    /// Класс AudioPlayerControl представляет собой пользовательский элемент управления для воспроизведения аудио.
+    /// </summary>
     public partial class AudioPlayerControl : UserControl
     {
+        /// <summary>
+        /// Объект для воспроизведения аудио.
+        /// </summary>
         private IWavePlayer _waveOut = new WaveOut();
+
+        /// <summary>
+        /// Объект для чтения аудиоданных.
+        /// </summary>
         private RawSourceWaveStream _waveStream = null!;
+
+        /// <summary>
+        /// Объект для хранения аудиоданных.
+        /// </summary>
         private MemoryStream _stream = null!;
+
+        /// <summary>
+        /// Флаг, указывающий, воспроизводится ли аудио.
+        /// </summary>
         private bool _isPlaying;
 
+        /// <summary>
+        /// Конструктор класса AudioPlayerControl.
+        /// </summary>
         public AudioPlayerControl()
         {
             InitializeComponent();
@@ -19,6 +40,11 @@ namespace Chat.ClientApp.Controls
             _isPlaying = false;
         }
 
+        /// <summary>
+        /// Загружает аудиоданные для воспроизведения.
+        /// </summary>
+        /// <param name="userName">Имя пользователя.</param>
+        /// <param name="audioData">Аудиоданные.</param>
         public void LoadAudio(string userName, byte[] audioData)
         {
             UserNameText.Text = userName;
@@ -41,11 +67,16 @@ namespace Chat.ClientApp.Controls
             _waveOut.Volume = 1.0f;
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки "Play".
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Аргументы события.</param>
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isPlaying) return;
 
-            // �������� ��������� ����� ����������������
+            // Если аудио достигло конца, перезапускаем его
             if (_waveStream.Position == _waveStream.Length)
             {
                 _stream.Position = 0;
@@ -56,6 +87,11 @@ namespace Chat.ClientApp.Controls
             _isPlaying = true;
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки "Pause".
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Аргументы события.</param>
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isPlaying)
@@ -65,6 +101,11 @@ namespace Chat.ClientApp.Controls
             }
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки "Stop".
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Аргументы события.</param>
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isPlaying)
@@ -74,11 +115,20 @@ namespace Chat.ClientApp.Controls
             }
         }
 
+        /// <summary>
+        /// Обработчик события остановки воспроизведения аудио.
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Аргументы события.</param>
         private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
         {
             _isPlaying = false;
         }
 
+        /// <summary>
+        /// Обработчик события выгрузки элемента управления.
+        /// </summary>
+        /// <param name="e">Аргументы события.</param>
         protected override void OnUnloaded(RoutedEventArgs e)
         {
             _waveOut?.Stop();
@@ -88,6 +138,11 @@ namespace Chat.ClientApp.Controls
             base.OnUnloaded(e);
         }
 
+        /// <summary>
+        /// Обработчик события изменения значения ползунка громкости.
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Аргументы события.</param>
         private void Slider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         {
             if (_waveOut != null)

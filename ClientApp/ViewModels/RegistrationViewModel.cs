@@ -19,7 +19,7 @@ namespace ClientApp.ViewModels
     {
         private readonly ISecurityService _securityService;
         private readonly IUserService _userService;
-        private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> _errors = [];
         private string _login = string.Empty;
         private string _password = string.Empty;
         private string _message = string.Empty;

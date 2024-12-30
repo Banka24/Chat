@@ -23,6 +23,7 @@ namespace ClientApp
         /// Свойство ServiceProvider предоставляет доступ к сервисам приложения.
         /// </summary>
         public static IServiceProvider ServiceProvider { get; private set; } = null!;
+
         private Window _window = null!;
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace ClientApp
             services.AddScoped<IMessageFormatter, MessageFormatter>();
             services.AddScoped<IZipService, ZipService>();
             services.AddSingleton<INavigationService, NavigationService>();
+
             services.AddSingleton(
                 new User(string.Empty, string.Empty)
                 );
@@ -59,7 +61,10 @@ namespace ClientApp
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                BindingPlugins.DataValidators.RemoveAt(0);
+                BindingPlugins
+                     .DataValidators
+                     .RemoveAt(0);
+
                 desktop.MainWindow = _window;
             }
 
