@@ -3,7 +3,6 @@ using Chat.ClientApp.Services.Contracts;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ClientApp.ViewModels
 {
@@ -33,7 +32,7 @@ namespace ClientApp.ViewModels
                 .GetRequiredService<IServerService>();
 
             ConnectionCommand = new RelayCommand(ExecuteConnection);
-            _ = Task.Run(async () => Servers = await _serverService.LoadServers());
+            Servers = _serverService.LoadServers().Result;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -80,7 +80,7 @@ public partial class ChatView : UserControl
 
     private void StartRecordAudio()
     {
-        AudioButton.Content = "||";
+        AudioButton.Content = "■";
         _buffer.Clear();
         _isRecord = true;
 
@@ -99,7 +99,7 @@ public partial class ChatView : UserControl
 
     private async Task StopRecordAudio()
     {
-        AudioButton.Content = "|>";
+        AudioButton.Content = "▶";
         _input.StopRecording();
         _input.Dispose();
         var vm = (ChatViewModel)DataContext!;

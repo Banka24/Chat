@@ -14,6 +14,7 @@
 		<StackPanel Orientation="Horizontal">
 			<Button Content="Назад" Margin="10, 0" Command="{Binding GoBackCommand}"/>
 			<TextBlock Text="{Binding ServerName}" FontWeight="Bold" FontSize="16"/>
+			<Button Content="Добавить в избраное" Margin="15" Command="{Binding AddFavoriteServerCommand}"/>
 		</StackPanel>
 
 		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}">

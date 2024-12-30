@@ -13,7 +13,9 @@ namespace Chat.Client
         private string _userName = string.Empty;
         private Socket _clientSocket = null!;
         private string _connectedServerName = string.Empty;
+        private string _serverIpAddress = string.Empty;
         public string ServerName => _connectedServerName;
+        public string IpAddress => _serverIpAddress;
 
         public event Action<string> MessageReceived = null!;
 
@@ -44,7 +46,9 @@ namespace Chat.Client
             _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
-                await _clientSocket.ConnectAsync(new IPEndPoint(IPAddress.Parse(ipAddress), 8888), cancellationToken);
+                var newIpAddress = IPAddress.Parse(ipAddress);
+                _serverIpAddress = newIpAddress.ToString();
+                await _clientSocket.ConnectAsync(new IPEndPoint(newIpAddress, 8888), cancellationToken);
                 WriteLine("Подключено к серверу");
 
                 var nameBytes = Encoding

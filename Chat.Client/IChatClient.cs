@@ -3,6 +3,7 @@
     public interface IChatClient
     {
         public string ServerName { get; }
+        public string IpAddress { get; }
         Task<bool> ConnectAsync(string ipAddress, string password, string userName, CancellationToken cancellationToken);
         Task SendAsync(byte[] data, CancellationToken cancellationToken);
         Task<string> GetServerNameAsync(CancellationToken cancellationToken);

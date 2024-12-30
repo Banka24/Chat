@@ -34,12 +34,14 @@ namespace ClientApp.ViewModels
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;
         private readonly IZipService _zipService;
+        private readonly IServerService _serverService;
         private readonly string _userName;
 
         /// <summary>
         /// Получает команду для отправки сообщения.
         /// </summary>
         public IRelayCommand SendMessageCommand { get; }
+        public IRelayCommand AddFavoriteServerCommand { get; }
 
         /// <summary>
         /// Получает или задает имя сервера.
@@ -89,7 +91,12 @@ namespace ClientApp.ViewModels
                 .GetRequiredService<User>()
                 .Login;
 
+            _serverService = App
+                .ServiceProvider
+                .GetRequiredService<IServerService>();
+
             SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
+            AddFavoriteServerCommand = new RelayCommand(async () => await AddFavoriteServerAsync());
             _chatClient = chatClient;
             _chatClient.MessageReceived += OnMessageReceived;
         }
@@ -243,6 +250,11 @@ namespace ClientApp.ViewModels
 
             await _chatClient.SendAsync(messageBytes, CancellationToken.None);
             Messages.Add(new AudioMessage("Я:", buffer));
+        }
+
+        private async Task AddFavoriteServerAsync()
+        {
+            await _serverService.AddServerAsync(_chatClient.ServerName, _chatClient.IpAddress);
         }
     }
 }
