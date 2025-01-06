@@ -11,6 +11,6 @@
 		<Button Content="Войти" Command="{Binding LoginCommand}" Margin="0, 25" 
 				Width="200" HorizontalContentAlignment="Center"/>
 		<Button Content="Регистрация" Margin="0, 25" Width="200" HorizontalContentAlignment="Center"
-				Command="{Binding RegistartionCommand}"/>
+				Command="{Binding RegistrationCommand}"/>
 	</StackPanel>
 </UserControl>
