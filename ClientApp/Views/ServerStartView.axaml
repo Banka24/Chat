@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ClientApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+			 x:DataType="vm:ServerStartViewModel"
+             x:Class="ClientApp.Views.ServerStartView">
+	<Grid RowDefinitions="60, *, *">
+		<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Message}"/>
+		
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0, 150">
+			<TextBlock Text="Название"/>
+			<TextBox Text="{Binding ServerName}" IsReadOnly="{Binding ServerWork}" Width="200"/>
+			<TextBlock Text="Пароль"/>
+			<TextBox PasswordChar="*" IsReadOnly="{Binding ServerWork}"
+					 Text="{Binding ServerPassword}" Width="200"/>
+		</StackPanel>
+		
+		<StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+			<Button Width="170" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Запустить" IsEnabled="{Binding !ServerWork}" Command="{Binding StartCommand}"/>
+
+			<Button Width="170" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Остановить" IsEnabled="{Binding ServerWork}" Command="{Binding StopCommand}"/>
+
+			<Button Width="170" Margin="15, 0, 0, 0" HorizontalContentAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Content="Назад" Command="{Binding GoBackCommand}" IsEnabled="{Binding GoBackEnabled}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

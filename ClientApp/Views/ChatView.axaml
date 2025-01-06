@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ClientApp.ViewModels"
+			 xmlns:f="clr-namespace:System.Windows.Openm"
+			 xmlns:local="clr-namespace:Chat.ClientApp.DTO;assembly=Chat.ClientApp"
+			 xmlns:controls="clr-namespace:Chat.ClientApp.Controls;assembly=Chat.ClientApp"
+             mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="960"
+             x:DataType="vm:ChatViewModel"
+             x:Class="ClientApp.Views.ChatView">
+	
+	<Grid RowDefinitions="60, *, 60">
+		<StackPanel Orientation="Horizontal">
+			<Button Content="Назад" Margin="10, 0" Command="{Binding GoBackCommand}"/>
+			<TextBlock Text="{Binding ServerName}" FontWeight="Bold" FontSize="16"/>
+			<Button Content="Добавить в избраное" Margin="15" Command="{Binding AddFavoriteServerCommand}"/>
+		</StackPanel>
+
+		<ListBox Grid.Row="1" ItemsSource="{Binding Messages}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<ContentControl>
+						<ContentControl.DataTemplates>
+							<DataTemplate DataType="{x:Type local:TextMessage}">
+								<TextBlock Text="{Binding Text}" />
+							</DataTemplate>
+							<DataTemplate DataType="{x:Type local:ImageMessage}">
+								<Image HorizontalAlignment="Left" Source="{Binding Image}"
+									   Width="{Binding Width}" Height="{Binding Height}" />
+							</DataTemplate>
+							<DataTemplate DataType="{x:Type local:AudioMessage}">
+								<controls:AudioPlayerControl x:Name="audioPlayerControl" Loaded="AudioPlayerControl_Loaded"/>
+							</DataTemplate>
+						</ContentControl.DataTemplates>
+						<ContentControl.Content>
+							<ContentPresenter Content="{Binding}" />
+						</ContentControl.Content>
+					</ContentControl>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<StackPanel Grid.Row="2" Orientation="Horizontal">
+			<TextBox Name="InputMessageBox" Text="{Binding UserMessage}" Width="1550" 
+					 Watermark="Для отправки сообщения Enter. Для переноса строки используйте Shift + Enter"
+					 IsReadOnly="{Binding IsReadOnly}" KeyDown="TextBox_KeyDown"/>
+			<Button Margin="10, 5, 5, 5" Name="AudioButton" Click="AudioClick"/>
+			<Button Margin="10, 5, 5, 5" Content="Добавить файл" Name="AddButton"/>
+			<Button Margin="10, 5, 5, 5" Content="Отправить"
+                    Command="{Binding SendMessageCommand}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

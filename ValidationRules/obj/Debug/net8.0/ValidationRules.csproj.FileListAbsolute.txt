@@ -1,0 +1,12 @@
+D:\learn\C#\Chat\ValidationRules\bin\Debug\net8.0\ValidationRules.deps.json
+D:\learn\C#\Chat\ValidationRules\bin\Debug\net8.0\ValidationRules.dll
+D:\learn\C#\Chat\ValidationRules\bin\Debug\net8.0\ValidationRules.pdb
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.GeneratedMSBuildEditorConfig.editorconfig
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.AssemblyInfoInputs.cache
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.AssemblyInfo.cs
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.csproj.CoreCompileInputs.cache
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.sourcelink.json
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.dll
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\refint\ValidationRules.dll
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ValidationRules.pdb
+D:\learn\C#\Chat\ValidationRules\obj\Debug\net8.0\ref\ValidationRules.dll

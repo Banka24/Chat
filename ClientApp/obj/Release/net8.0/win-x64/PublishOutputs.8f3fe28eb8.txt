@@ -1,0 +1,10 @@
+C:\Users\Banka\Desktop\App\Chat.ClientApp.pdb
+C:\Users\Banka\Desktop\App\av_libglesv2.dll
+C:\Users\Banka\Desktop\App\libHarfBuzzSharp.dll
+C:\Users\Banka\Desktop\App\libSkiaSharp.dll
+C:\Users\Banka\Desktop\App\Chat.ClientApp.Models.pdb
+C:\Users\Banka\Desktop\App\Chat.ClientApp.Services.pdb
+C:\Users\Banka\Desktop\App\Chat.Client.pdb
+C:\Users\Banka\Desktop\App\Chat.Server.pdb
+C:\Users\Banka\Desktop\App\Chat.ClientApp.ValidationRules.pdb
+C:\Users\Banka\Desktop\App\Chat.ClientApp.exe
