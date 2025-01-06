@@ -23,13 +23,13 @@ namespace ClientApp.ViewModels
     /// </summary>
     public class ChatViewModel : ViewModelBase
     {
-        private const string MessageTypeString = "str";
-        private const string MessageTypeImage = "img";
         private const string MessageTypeAudio = "aud";
+        private const string MessageTypeImage = "img";
+        private const string MessageTypeString = "str";
 
         private string _serverName = string.Empty;
         private string _userMessage = string.Empty;
-        private bool _isReadOnly = false;
+        private bool _isReadOnly;
         private ICollection<IStorageFile> _files = null!;
         private readonly IMessageFormatter _messageFormatter;
         private readonly IChatClient _chatClient;

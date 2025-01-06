@@ -15,7 +15,7 @@ namespace ClientApp.ViewModels
         private string _ipAddress = string.Empty;
         private string _password = string.Empty;
         private string _errorMessage = string.Empty;
-        private bool _isConnecting = false;
+        private bool _isConnecting;
 
         /// <summary>
         /// Получает или задает состояние подключения.

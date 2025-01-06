@@ -151,7 +151,6 @@ namespace Chat.Server
 
                 _connectedClients.TryAdd(clientSocket, userName);
 
-
                 await NotifyClientsAsync($"{userName} присоединился к чату.")
                     .ConfigureAwait(false);
 
@@ -193,7 +192,6 @@ namespace Chat.Server
         /// <param name="message">сообщение для уведомления</param>
         private async Task NotifyClientsAsync(string message)
         {
-
             string jsonMessage = _messageFormatter.SerializeMessage("Server", "str", message);
 
             byte[] messageBytes = Encoding
